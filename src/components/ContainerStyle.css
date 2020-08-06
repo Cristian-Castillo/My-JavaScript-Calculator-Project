@@ -1,0 +1,26 @@
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  .container{
+     width:250px;
+     background-color:black;
+     border:.8px ridge black;
+  }
+
+  .col-result-layout{
+      text-align:right;
+  }
+
+  .col-subresult{
+      font-size:10px;
+      color:orange;
+      padding-top:3px;
+  }
