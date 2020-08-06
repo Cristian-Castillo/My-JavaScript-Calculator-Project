@@ -4,10 +4,6 @@ import ContainerStyle from './ContainerStyle.css'
 
 class CalculatorContainer extends Component {
 
-    constructor(props){
-        super(props);
-    }
-
     render(){
         /* Returns math operation result from redux store*/
         /* Declared const to hold props from store */
@@ -36,27 +32,15 @@ class CalculatorContainer extends Component {
             backgroundColor:'rgb(193, 196, 211)',
             border:'.1px solid black'
         }
-        const styleButtonEq = {
-            backgroundColor:'rgb(193, 196, 211)',
-            border:'.1px solid black',
-            borderTop:'none'
-        }
-
-        const styleButtonEqTwo = {
-            backgroundColor:'rgb(193, 196, 211)',
-            border:'.1px solid black',
-            borderBottom:'none',
-        }
-
-        /* Calculator Container*/
+        /* JSX Calculator Container*/
         return(
             <div className="container">
                 <div className="row col-result-layout">
-                <div className="col-12 col-subresult">{displayArray}</div>
-                    <div className="col-12 ">{displayArray}</div>
+                <div className="col-12 col-subresult">{displayResult ? displayArray: displayArray.length > 0 ? displayArray : displayResult}</div>
+                    <div className="col-12 ">{displayResult}</div>
                 </div>
-                <div style= {{backgroundColor:'yellow',}}className="row">
-                    <div className="col-6" style= {{border:'.5px solid black',backgroundColor:'rgb(221, 62, 97)',}}><button className ='ac-style' onClick = {setReset}>AC</button></div>
+                <div className="row">
+                    <div className="col-6 ac-div" ><button className ='ac-style' onClick = {setReset}>AC</button></div>
                     <div className="col-3" style= {styleButton}><button className = 'division-style' onClick ={setDiv}>/</button></div>
                     <div className="col-3" style= {styleButton}><button className ='mult-style' onClick ={setMultiply}>x</button></div>
                 </div>
@@ -76,12 +60,17 @@ class CalculatorContainer extends Component {
                     <div style= {styleButton} className="col-3"><button className='dig-one' onClick = {addOne}>1</button></div>
                     <div style= {styleButton} className="col-3"><button className='dig-two' onClick ={addTwo}>2</button></div>
                     <div style= {styleButton} className="col-3"><button className='dig-three' onClick ={addThree}>3</button></div>
-                    <div style= {styleButtonEqTwo} className="col-3"><button className='op-equal' onClick ={setEqual}>=</button></div>
+                    <div className="col-3 op-equalDiv"><button className='op-equal' onClick ={setEqual}>=</button></div>
                 </div>
-                <div className="row">
-                    <div style= {styleButton} className="col-6"><button className='dig-zero' onClick ={addZero}>0</button></div>
+                <div style = {{paddingBottom:'2px'}} className="row">
+                    <div className="col-6 dig-zeroDiv"><button className='dig-zero' onClick ={addZero}>0</button></div>
                     <div style= {styleButton} className="col-3"><button className='op-dec' onClick ={setDecimal}>.</button></div>
-                    <div style= {styleButtonEq} className='col-3'></div>  
+         
+                </div>
+                <div className ='authorDiv'>
+                    <br></br>
+                    <h5 className ='authorStyle'>Designed and Coded By</h5>
+                    <h5 className ='authorStyle'>Cristian C. Castillo</h5>
                 </div>
             </div>
         )

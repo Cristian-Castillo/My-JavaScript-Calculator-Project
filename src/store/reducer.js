@@ -32,16 +32,16 @@ const defaultState = {
 }
 
 /* Array of numbers to concat to state object */
-const valZero = [0];
-const valOne = [1];
-const valTwo = [2];
-const valThree = [3];
-const valFour = [4];
-const valFive = [5];
-const valSix = [6];
-const valSeven = [7];
-const valEight = [8];
-const valNine = [9];
+const valZero = ['0'];
+const valOne = ['1'];
+const valTwo = ['2'];
+const valThree = ['3'];
+const valFour = ['4'];
+const valFive = ['5'];
+const valSix = ['6'];
+const valSeven = ['7'];
+const valEight = ['8'];
+const valNine = ['9'];
 const opSub = ['-'];
 const opMult = ['X'];
 const opDec = ['.'];
@@ -53,47 +53,62 @@ const opNan = ['NAN'];
 
 const reducer = (state = defaultState,action) => {
 
+    const copyArray = [...state.numberArray]
+    let subContainer = []
+
     switch(action.type){
 
         case EQUAL:{
+            
+            const len = copyArray.length
+            let emptyStr = ''
+            let accumulator = 0
 
-            // const len = state.numberArray.length;
-            // const tempAry = [...state.numberArray]
+            /* Group numbers and isolate math operands */
+            for(let i = 0; i < len;i++){
 
-            // for(let i = 0; i < len;i++){
+                /* Check Addition */
+                if(copyArray[i] !== '+'){
+                    emptyStr += copyArray[i]
+                }
+                else if(copyArray[i] === '+'){
+                    subContainer.push(parseFloat(emptyStr))
+                    subContainer.push('+')
+                    emptyStr = ''
+                }
+                if(copyArray[i] === '-'){
+                    subContainer.push(parseFloat(emptyStr))
+                    subContainer.push('-')
+                    emptyStr = ''
+                }
+            }
 
-            // }
-    
-        //     if(state.numberArray[0] === 0){
-        //         return{
-        //             ...state,
-        //             numberArray:state.numberArray = opNan
-        //         }
-        //     }
-        //     /* If repeated sequential presses to equal return NAN */
-        //     else if(state.numberArray[len-1] == opNan){
-        //         return{
-        //             ...state,
-        //             numberArray:state.numberArray
-        //         }
-        //     }
-        //     /* If n display that n = n, edge condition inplaced if 
-        //     = is hit consecutively */
-        //     else if(state.numberArray[0] != opEqual){
-        //         if(flag == true){
-        //             return {
-        //                 ...state
-        //             }
-        //         }
-        //         flag = true
-        //         return{
-        //             ...state,
-        //             numberArray:[...state.numberArray,opEqual,state.numberArray]
-        //         }
-        //     }
-        //    else{
-        //        console.log(state.numberArray)
-        //    }
+            subContainer.push(parseFloat(emptyStr))
+            emptyStr = '';
+
+            /* Begin math logic operations */
+            const subLen = subContainer.length
+
+            for(let j = 0; j < subLen;j++){
+
+                if(subContainer[j] === '+'){
+                    accumulator += subContainer[j-1]
+                }
+                /* We have reached end of container add/sub/mult/etc to end*/
+                else if(subLen-1 === j){
+                    
+                    if(subContainer[subLen-2] === '+'){
+                        accumulator += subContainer[subLen-1]
+                    }
+                }
+
+
+            }
+            /* Return the updated state and display to store */
+            return{
+                ...state,
+                total:state.total = accumulator,
+            }
         }
         case SUBTRACT:{
             const len = state.numberArray.length;
@@ -153,7 +168,7 @@ const reducer = (state = defaultState,action) => {
                 }
             } 
             /* if n and n+1 is equal to * then just return unchanged */
-            else if(state.numberArray[len-1] == opMult){
+            else if(state.numberArray[len-1] === opMult){
                 return{
                     ...state,
                     numberArray:state.numberArray
@@ -193,7 +208,7 @@ const reducer = (state = defaultState,action) => {
                 }
             } 
             /* if n and n+1 is equal to div then just return unchanged */
-            else if(state.numberArray[len-1] == opDiv){
+            else if(state.numberArray[len-1] === opDiv){
                 return{
                     ...state,
                     numberArray:state.numberArray
@@ -226,9 +241,11 @@ const reducer = (state = defaultState,action) => {
                     numberArray:state.numberArray[0] = valOne
                 }
             }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valOne)
+            else{
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valOne)
+                }
             }
         case ADDTWO:
             if(state.numberArray[0] === 0){
