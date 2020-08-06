@@ -43,13 +43,12 @@ const valSeven = ['7'];
 const valEight = ['8'];
 const valNine = ['9'];
 const opSub = ['-'];
-const opMult = ['X'];
+const opMult = ['•'];
 const opDec = ['.'];
 const opDiv = ['/'];
 const opAdd = ['+'];
 const opEqual = ['='];
 const opNan = ['NAN'];
-
 
 const reducer = (state = defaultState,action) => {
 
@@ -76,15 +75,28 @@ const reducer = (state = defaultState,action) => {
                     subContainer.push('+')
                     emptyStr = ''
                 }
+
                 if(copyArray[i] === '-'){
                     subContainer.push(parseFloat(emptyStr))
                     subContainer.push('-')
+                    emptyStr = ''
+                }
+                if(copyArray[i] === opMult[0]){
+                    subContainer.push(parseFloat(emptyStr))
+                    subContainer.push('*')
+                    emptyStr = ''
+                }
+                if(copyArray[i] === opDiv[0]){
+                    subContainer.push(parseFloat(emptyStr))
+                    subContainer.push('/')
                     emptyStr = ''
                 }
             }
 
             subContainer.push(parseFloat(emptyStr))
             emptyStr = '';
+            console.log(subContainer)
+            /* Checkpoint all symbols register at this point */
 
             /* Begin math logic operations */
             const subLen = subContainer.length
@@ -101,8 +113,6 @@ const reducer = (state = defaultState,action) => {
                         accumulator += subContainer[subLen-1]
                     }
                 }
-
-
             }
             /* Return the updated state and display to store */
             return{

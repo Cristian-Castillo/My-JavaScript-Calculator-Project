@@ -36,7 +36,7 @@ class CalculatorContainer extends Component {
         return(
             <div className="container">
                 <div className="row col-result-layout">
-                <div className="col-12 col-subresult">{displayResult ? displayArray: displayArray.length > 0 ? displayArray : displayResult}</div>
+        <div className="col-12 col-subresult">{displayArray}</div>
                     <div className="col-12 ">{displayResult}</div>
                 </div>
                 <div className="row">
