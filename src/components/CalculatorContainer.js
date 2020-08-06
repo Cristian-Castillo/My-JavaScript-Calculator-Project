@@ -65,7 +65,7 @@ class CalculatorContainer extends Component {
                 <div style = {{paddingBottom:'2px'}} className="row">
                     <div className="col-6 dig-zeroDiv"><button className='dig-zero' onClick ={addZero}>0</button></div>
                     <div style= {styleButton} className="col-3"><button className='op-dec' onClick ={setDecimal}>.</button></div>
-         
+                    <div className='deadCell'>JS</div>
                 </div>
                 <div className ='authorDiv'>
                     <br></br>
