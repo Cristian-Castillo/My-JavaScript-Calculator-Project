@@ -57,13 +57,14 @@ button{
 
 .ac-style:hover{
   background-color:rgb(255, 5, 60) !important;
-  width:95px;
-  margin-left:-14px;
+  width:115px;
+  margin-left:-30px;
+  border-radius:20px;
 }
 
 .ac-div:hover{
-  background-color:#636571 !important;
-  border-radius:25px;
+  background-color:black;
+  border-radius:24px;
   outline:0;
 }
 
@@ -234,9 +235,15 @@ button{
   width:200px;
   margin-left:-15px;
   padding-bottom:10px;
+  border-left:none;
+  border-right:none;
+  border-bottom:none;
 }
 
 .authorStyle{
   color:black;
   font-size:10px;
+  border-left:none;
+  border-right:none;
+  border-bottom:none;
 }
