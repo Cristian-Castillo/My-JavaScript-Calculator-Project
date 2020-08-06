@@ -1,3 +1,7 @@
+:root{
+    --customGray:rgb(193, 196, 211);
+}
+
 .App-header {
     background-color: #282c34;
     min-height: 100vh;
@@ -10,7 +14,7 @@
   }
 
   .container{
-     width:250px;
+     width:180px;
      background-color:black;
      border:.8px ridge black;
   }
@@ -23,4 +27,136 @@
       font-size:10px;
       color:orange;
       padding-top:3px;
+  }
+
+  .ac-style{
+      border:none;
+      color:white;
+      background-color:rgb(221, 62, 97)
+     
+  
+  }
+
+  .division-style{
+    background-color:var(--customGray);
+    color:white;
+    border-style:none;
+  }
+
+  .mult-style{
+    border-style:none;
+    background-color:var(--customGray);
+    color:white;
+   
+  }
+
+  .dig-seven{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .dig-eight{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .dig-nine{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .op-sub{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .dig-four{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .dig-five{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .dig-six{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .op-add{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .dig-one{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .dig-two{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .dig-three{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .op-equal{
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+    border-bottom:none;
+  }
+  .dig-zero{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-5px;
+    border-style:none;
+  }
+
+  .op-dec{
+    border:.5px solid black;
+    background-color:var(--customGray);
+    color:#ffffff;
+    margin-left:-2px;
+    border-style:none;
   }

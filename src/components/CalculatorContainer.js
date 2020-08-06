@@ -31,6 +31,23 @@ class CalculatorContainer extends Component {
         const addEight = this.props.addEight
         const addNine = this.props.addNine
 
+        /*Button styling */
+        const styleButton = {
+            backgroundColor:'rgb(193, 196, 211)',
+            border:'.1px solid black'
+        }
+        const styleButtonEq = {
+            backgroundColor:'rgb(193, 196, 211)',
+            border:'.1px solid black',
+            borderTop:'none'
+        }
+
+        const styleButtonEqTwo = {
+            backgroundColor:'rgb(193, 196, 211)',
+            border:'.1px solid black',
+            borderBottom:'none',
+        }
+
         /* Calculator Container*/
         return(
             <div className="container">
@@ -38,33 +55,33 @@ class CalculatorContainer extends Component {
                 <div className="col-12 col-subresult">{displayArray}</div>
                     <div className="col-12 ">{displayArray}</div>
                 </div>
-                <div className="row">
-                    <div className="col"><button onClick = {setReset}>AC</button></div>
-                    <div className="col"><button onClick ={setDiv}>/</button></div>
-                    <div className="col"><button onClick ={setMultiply}>x</button></div>
+                <div style= {{backgroundColor:'yellow',}}className="row">
+                    <div className="col-6" style= {{border:'.5px solid black',backgroundColor:'rgb(221, 62, 97)',}}><button className ='ac-style' onClick = {setReset}>AC</button></div>
+                    <div className="col-3" style= {styleButton}><button className = 'division-style' onClick ={setDiv}>/</button></div>
+                    <div className="col-3" style= {styleButton}><button className ='mult-style' onClick ={setMultiply}>x</button></div>
                 </div>
                 <div className="row">
-                    <div className="col"><button onClick ={addSeven}>7</button></div>
-                    <div className="col"><button onClick ={addEight}>8</button></div>
-                    <div className="col"><button onClick ={addNine}>9</button></div>
-                    <div className="col"><button onClick ={setSubtract}>-</button></div>
+                    <div className="col-3" style= {styleButton}><button className='dig-seven' onClick ={addSeven}>7</button></div>
+                    <div className="col-3" style= {styleButton}><button className='dig-eight' onClick ={addEight}>8</button></div>
+                    <div className="col-3" style= {styleButton}><button className='dig-nine' onClick ={addNine}>9</button></div>
+                    <div className="col-3" style= {styleButton}><button className='op-sub' onClick ={setSubtract}>-</button></div>
                 </div>
                 <div className="row">
-                    <div className="col"><button onClick ={addFour}>4</button></div>
-                    <div className="col"><button onClick ={addFive}>5</button></div>
-                    <div className="col"><button onClick ={addSix}>6</button></div>
-                    <div className="col"><button onClick ={setAdd}>+</button></div>
+                    <div style= {styleButton} className="col-3"><button className='dig-four' onClick ={addFour}>4</button></div>
+                    <div style= {styleButton} className="col-3"><button className='dig-five' onClick ={addFive}>5</button></div>
+                    <div style= {styleButton} className="col-3"><button className='dig-six' onClick ={addSix}>6</button></div>
+                    <div style= {styleButton} className="col-3"><button className='op-add' onClick ={setAdd}>+</button></div>
                 </div>
                 <div className="row">
-                    <div className="col"><button onClick = {addOne}>1</button></div>
-                    <div className="col"><button onClick ={addTwo}>2</button></div>
-                    <div className="col"><button onClick ={addThree}>3</button></div>
-                    <div className="col"><button onClick ={setEqual}>=</button></div>
+                    <div style= {styleButton} className="col-3"><button className='dig-one' onClick = {addOne}>1</button></div>
+                    <div style= {styleButton} className="col-3"><button className='dig-two' onClick ={addTwo}>2</button></div>
+                    <div style= {styleButton} className="col-3"><button className='dig-three' onClick ={addThree}>3</button></div>
+                    <div style= {styleButtonEqTwo} className="col-3"><button className='op-equal' onClick ={setEqual}>=</button></div>
                 </div>
                 <div className="row">
-                    <div className="col-6"><button onClick ={addZero}>0</button></div>
-                    <div className="col-3"><button onClick ={setDecimal}>.</button></div>
-                    <div className='col-3'></div>  
+                    <div style= {styleButton} className="col-6"><button className='dig-zero' onClick ={addZero}>0</button></div>
+                    <div style= {styleButton} className="col-3"><button className='op-dec' onClick ={setDecimal}>.</button></div>
+                    <div style= {styleButtonEq} className='col-3'></div>  
                 </div>
             </div>
         )
