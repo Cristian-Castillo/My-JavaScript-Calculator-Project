@@ -9,6 +9,7 @@ class CalculatorContainer extends Component {
         /* Declared const to hold props from store */
         const displayResult = this.props.storeTotal
         const displayArray = this.props.storeArray
+        const displayError = this.props.storeError
         const setDiv = this.props.division
         const setAdd = this.props.add
         const setReset = this.props.reset
@@ -45,8 +46,8 @@ class CalculatorContainer extends Component {
                 </div>
             <div className="container">
                 <div className="row col-result-layout">
-                    <div className="col-12 col-subresult">{displayArray[0] === '0' ? displayResult : displayArray}</div>
-                    <div className="col-12 ">{displayResult}</div>
+        <div className="col-12 col-subresult">{displayArray[0] === '0' ? displayResult : displayArray}</div>
+                    <div className="col-12 ">{displayArray.length > 20 ? displayError : displayResult}</div>
                 </div>
                 <div className="row r1">
                     <div className="col-6 ac-div" ><button className ='ac-style' onClick = {setReset}>AC</button></div>
@@ -91,6 +92,7 @@ const mapStateToProps = (state) => {
     return{
         storeTotal:state.total,
         storeArray:state.numberArray,
+        storeError:state.error
     }
 }
 /* anonymous ascynch function dispatching the action creator

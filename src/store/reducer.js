@@ -18,12 +18,13 @@ const MULTIPLY = 'MULTIPLY'
 const EQUAL = 'EQUAL'
 const DECIMAL = 'DECIMAL'
 const SUBTRACT = 'SUBTRACT'
-
+const ERROR = 'DIGIT LIMIT EXCEEDED'
 
 /* default reducer state & array */
 const defaultState = {
     total:0,
     numberArray:['0'],
+    error:ERROR
 }
 
 /* Array of numbers to concat to state object */
@@ -68,7 +69,6 @@ const reducer = (state = defaultState,action) => {
             }
             /* Group numbers and isolate math operands */
             for(let i = 0; i < len;i++){
-
                 /* Check Addition */
                 if(copyArray[i] !== '+'){
                     emptyStr += copyArray[i]
@@ -273,7 +273,6 @@ const reducer = (state = defaultState,action) => {
                     numberArray:state.numberArray = copyArray
                 }
             }
-
             return{
                 ...state,
                 numberArray:state.numberArray.concat(opDec[0])
@@ -317,9 +316,19 @@ const reducer = (state = defaultState,action) => {
                     numberArray:[...valZero]
                 }
             }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valZero[0])
+            else{/* Check length input must be less then n 
+                display digit max length error */
+                if(state.numberArray.length > 20){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray,
+                        error:ERROR
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valZero[0])
+                } 
             }
         case ADDONE:
             if(state.numberArray[0] === valZero[0]){
@@ -328,7 +337,15 @@ const reducer = (state = defaultState,action) => {
                     numberArray:state.numberArray[0] = valOne[0]
                 }
             }
-            else{
+            else{/* Check length input must be less then n 
+                  display digit max length error */
+                if(state.numberArray.length > 20){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray,
+                        error:ERROR
+                    }
+                }
                 return{
                     ...state,
                     numberArray:state.numberArray.concat(valOne[0])
@@ -341,9 +358,18 @@ const reducer = (state = defaultState,action) => {
                     numberArray:state.numberArray[0] = valTwo[0]
                 }
             }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valTwo[0])
+            else{/* Check length input must be less then n display digit max length error */
+                if(state.numberArray.length > 20){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray,
+                        error:ERROR
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valTwo[0])
+                }
             }
         case ADDTHREE:
             if(state.numberArray[0] === valZero[0]){
@@ -352,9 +378,18 @@ const reducer = (state = defaultState,action) => {
                     numberArray:state.numberArray[0] = valThree[0]
                 }
             }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valThree[0])
+            else{/* Check length input must be less then n display digit max length error */
+                if(state.numberArray.length > 20){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray,
+                        error:ERROR
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valThree[0])
+                }
             }
         case ADDFOUR:
             if(state.numberArray[0] === valZero[0]){
@@ -363,9 +398,19 @@ const reducer = (state = defaultState,action) => {
                     numberArray:state.numberArray[0] = valFour[0]
                 }
             }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valFour[0])
+            else{
+                /* Check length input must be less then n display digit max length error */
+                if(state.numberArray.length > 20){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray,
+                        error:ERROR
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valFour[0])
+                }
             }
         case ADDFIVE:
             if(state.numberArray[0] === valZero[0]){
@@ -374,9 +419,19 @@ const reducer = (state = defaultState,action) => {
                     numberArray:state.numberArray[0] = valFive[0]
                 }
             }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valFive[0])
+            else{
+                /* Check length input must be less then n display digit max length error */
+                if(state.numberArray.length > 20){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray,
+                        error:ERROR
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valFive[0])
+                }
             }
         case ADDSIX:
             if(state.numberArray[0] === valZero[0]){
@@ -385,9 +440,19 @@ const reducer = (state = defaultState,action) => {
                     numberArray:state.numberArray[0] = valSix[0]
                 }
             }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valSix[0])
+            else{
+                /* Check length input must be less then n display digit max length error */
+                if(state.numberArray.length > 20){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray,
+                        error:ERROR
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valSix[0])
+                }
             }
             case ADDSEVEN:
                 if(state.numberArray[0] === valZero[0]){
@@ -396,9 +461,19 @@ const reducer = (state = defaultState,action) => {
                         numberArray:state.numberArray[0] = valSeven[0]
                     }
                 }
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(valSeven[0])
+                else{
+                    /* Check length input must be less then n display digit max length error */
+                    if(state.numberArray.length > 20){
+                        return{
+                            ...state,
+                            numberArray:state.numberArray,
+                            error:ERROR
+                        }
+                    }
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(valSeven[0])
+                    }
                 }
             case ADDEIGHT:
                 if(state.numberArray[0] === valZero[0]){
@@ -407,9 +482,18 @@ const reducer = (state = defaultState,action) => {
                         numberArray:state.numberArray[0] = valEight[0]
                     }
                 }
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(valEight[0])
+                else{/* Check length input must be less then n display digit max length error */
+                    if(state.numberArray.length > 20){
+                        return{
+                            ...state,
+                            numberArray:state.numberArray,
+                            error:ERROR
+                        }
+                    }
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(valEight[0])
+                    }
                 }
             case ADDNINE:
                 if(state.numberArray[0] === valZero[0]){
@@ -418,9 +502,19 @@ const reducer = (state = defaultState,action) => {
                         numberArray:state.numberArray[0] = valNine[0]
                     }
                 }
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(valNine[0])
+                else{
+                    /* Check length input must be less then n display digit max length error */
+                    if(state.numberArray.length > 20){
+                        return{
+                            ...state,
+                            numberArray:state.numberArray,
+                            error:ERROR
+                        }
+                    }
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(valNine[0])
+                    }
                 }
             default:
                 return state
