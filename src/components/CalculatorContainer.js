@@ -27,11 +27,12 @@ class CalculatorContainer extends Component {
         const addEight = this.props.addEight
         const addNine = this.props.addNine
 
-        /*Button styling */
+        /* Button styling */
         const styleButton = {
             border:'.1px solid black',
             background:'var(--darkGray)'
         }
+        /* Layout Logo styling */
         const coolLayout = {
             position:'relative',
             top:'-40px'
@@ -73,7 +74,7 @@ class CalculatorContainer extends Component {
                 <div style = {{paddingBottom:'2px'}} className="row r5">
                     <div className="col-6 dig-zeroDiv"><button className='dig-zero' onClick ={addZero}>0</button></div>
                     <div style= {styleButton} className="col-3"><button className='op-dec' onClick ={setDecimal}>.</button></div>
-                    <div className='deadCell'>JS</div>
+                    <div className='deadCell'><button className = 'op-dec ' onClick ={setEqual}>Enter</button></div>
                 </div>
                 <div className ='authorDiv'>
                     <br></br>

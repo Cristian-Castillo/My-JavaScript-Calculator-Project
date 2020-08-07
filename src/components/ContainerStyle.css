@@ -2,7 +2,6 @@
     --customGray:rgb(193, 196, 211);
     --genericButton:#4d4d4d;
     --darkGray:#636571;
-    
 }
 
 .App-header {
@@ -26,60 +25,7 @@ button{
   animation-duration: 3s;
 }
 
-@keyframes colorful {
-  0%{
-    background-color:yellowgreen !important;
-  }
-  25%{
-    background-color:fuchsia !important;
-  }
-
-  30%{
-    background-color:fuchsia !important;
-  }
-
-  40%{
-    background-color:fuchsia !important;
-  }
-
-  45%{
-    background-color:fuchsia !important;
-  }
-
-  50%{
-    background-color:fuchsia !important;
-  }
-
-  55%{
-    background-color:fuchsia !important;
-  }
-  60%{
-    background-color:fuchsia !important;
-  }
-
-  65%{
-    background-color:fuchsia !important;
-  }
-  70%{
-    background-color:fuchsia !important;
-  }
-
-  75%{
-    background-color:fuchsia !important;
-  }
-
-  85%{
-    background-color:fuchsia !important;
-  }
-
-  100%{
-    background-color:fuchsia !important;
-  }
-}
-
 button:hover{
-  /* background-color:white !important; */
-  /* border-radius:50px; */
   color:black;
 }
 
@@ -133,7 +79,6 @@ button:hover{
   background-color:var(--darkGray);
   color:white;
   transition-delay:5s;
-  
 }
 
 .dig-seven{
@@ -146,7 +91,6 @@ button:hover{
 
 .dig-seven:hover{
   color:black;
-  
 }
 
 .dig-eight{
@@ -236,12 +180,15 @@ button:hover{
   position:relative;
   text-align: center;
   width:25.8px;
+  border-bottom:none !important;
+
 }
 .op-equalDiv{
   background-color:var(--darkGray) !important;
   border:.1px solid black;
   position:relative;
   color:white;
+  border-bottom:none !important;
 }
 
 .dig-zero{
@@ -251,10 +198,9 @@ button:hover{
   border-style:none;
 }
 
-
 .dig-zeroDiv{
   background-color:var(--darkGray);
-    border:.5px solid black;
+  border:.5px solid black;
 }
 
 .op-dec{
@@ -266,9 +212,12 @@ button:hover{
 
 .deadCell{
   background-color:var(--darkGray);
-  cursor:not-allowed;
+  cursor:pointer;
   border:.1px solid black;
-  width:61px;
+  width:61.24px;
+  font-size:13px;
+  padding-top:4px;
+  border-top:none;
 }
 
 .authorDiv{
@@ -288,7 +237,6 @@ button:hover{
   border-right:none;
   border-bottom:none;
 }
-
 /* Row corner lights */
 .r1:hover{
   background-color:cyan !important;
@@ -321,7 +269,6 @@ button:hover{
   background-color:black !important;
   transition-delay:.07s;
 }
-
 /* COOL LABEL */
 .coolStyle{
   font-family: 'Lemonada', cursive;
@@ -329,3 +276,4 @@ button:hover{
   font-size:70px;
   text-align: center;
 }
+

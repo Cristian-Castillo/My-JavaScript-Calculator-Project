@@ -23,6 +23,7 @@ const SUBTRACT = 'SUBTRACT'
 const defaultState = {
     total:0,
     numberArray:['0'],
+    
 }
 
 /* Array of numbers to concat to state object */
