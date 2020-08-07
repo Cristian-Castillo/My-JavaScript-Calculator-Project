@@ -19,11 +19,11 @@ const EQUAL = 'EQUAL'
 const DECIMAL = 'DECIMAL'
 const SUBTRACT = 'SUBTRACT'
 
+
 /* default reducer state & array */
 const defaultState = {
     total:0,
     numberArray:['0'],
-    
 }
 
 /* Array of numbers to concat to state object */
@@ -59,6 +59,13 @@ const reducer = (state = defaultState,action) => {
             let emptyStr = ''
             let accumulator = 0
 
+            /* If Enter is hit first as input then display not a number */
+            if(action.type === EQUAL && state.numberArray[0] === valZero[0]){
+                return{
+                    ...state,
+                    total:opNan[0]
+                }
+            }
             /* Group numbers and isolate math operands */
             for(let i = 0; i < len;i++){
 
@@ -87,6 +94,11 @@ const reducer = (state = defaultState,action) => {
                 if(copyArray[i] === opDiv[0]){
                     subContainer.push(parseFloat(emptyStr))
                     subContainer.push('/')
+                    emptyStr = ''
+                }
+                if(copyArray[i] === opDec[0]){
+                    subContainer.push(parseFloat(emptyStr))
+                    subContainer.push('.')
                     emptyStr = ''
                 }
             }
@@ -252,18 +264,19 @@ const reducer = (state = defaultState,action) => {
             }
         }
         case DECIMAL:{
-            
-            if(state.numberArray[0] === 0){
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(opDec)
+
+            if(state.numberArray[0] === valZero[0]){
+                console.log('working')
+                let copyArray = ['0.'];
+                return {
+                    ...defaultState,
+                    numberArray:state.numberArray = copyArray
                 }
             }
-            else{
-                return{
-                    ...state,
-                    numberArray:state.numberArray
-                }
+
+            return{
+                ...state,
+                numberArray:state.numberArray.concat(opDec[0])
             }
         }
         case DIVISION:{
