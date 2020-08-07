@@ -76,9 +76,9 @@ button{
   border-style:none;
 }
 
-.division-style:hover{
+/* .division-style:hover{
   background-color:#636571 !important;
-}
+} */
 
 .mult-style{
   border-style:none;
@@ -190,11 +190,11 @@ button{
   position:relative;
 }
 
-.op-equalDiv:hover{
+/* .op-equalDiv:hover{
   background-color:#636571 !important;
   border-radius:55px !important;
   outline:0;
-}
+} */
 
 .dig-zero{
   border:.5px solid black;
@@ -208,11 +208,11 @@ button{
   border:.1px solid black;
 }
 
-.dig-zeroDiv:hover{
+/* .dig-zeroDiv:hover{
   background-color:#636571 !important;
   border-radius:25px;
   outline:0;
-}
+} */
 
 .op-dec{
   border:.5px solid black;
@@ -228,9 +228,9 @@ button{
   width:61px;
 }
 
-.deadCell:hover,.col-3:hover{
+/* .deadCell:hover,.col-3:hover{
   background-color:none !important;  
-}
+} */
 
 .authorDiv{
   background-color:#c1d6ec;
