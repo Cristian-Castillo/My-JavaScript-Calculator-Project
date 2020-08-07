@@ -251,6 +251,7 @@ button:hover{
   border-style:none;
 }
 
+
 .dig-zeroDiv{
   background-color:var(--darkGray);
     border:.5px solid black;
@@ -281,14 +282,14 @@ button:hover{
 }
 
 .authorStyle{
-  color:black;
+  color:white;
   font-size:15px;
   border-left:none;
   border-right:none;
   border-bottom:none;
 }
-/* Row corner lights */
 
+/* Row corner lights */
 .r1:hover{
   background-color:cyan !important;
   transition-delay:.07s;
@@ -319,4 +320,12 @@ button:hover{
 .r6:hover{
   background-color:black !important;
   transition-delay:.07s;
+}
+
+/* COOL LABEL */
+.coolStyle{
+  font-family: 'Lemonada', cursive;
+  font-family: 'Lobster Two', cursive;
+  font-size:70px;
+  text-align: center;
 }

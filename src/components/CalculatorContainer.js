@@ -32,11 +32,19 @@ class CalculatorContainer extends Component {
             border:'.1px solid black',
             background:'var(--darkGray)'
         }
+        const coolLayout = {
+            position:'relative',
+            top:'-40px'
+        }
         /* JSX Calculator Container*/
         return(
+            <div>
+                <div style = {coolLayout}>
+                    <h1 className = 'coolStyle'>Cool Calculator</h1>
+                </div>
             <div className="container">
                 <div className="row col-result-layout">
-        <div className="col-12 col-subresult">{displayArray[0] === '0' ? displayResult : displayArray}</div>
+                    <div className="col-12 col-subresult">{displayArray[0] === '0' ? displayResult : displayArray}</div>
                     <div className="col-12 ">{displayResult}</div>
                 </div>
                 <div className="row r1">
@@ -72,6 +80,7 @@ class CalculatorContainer extends Component {
                     <h5 className ='authorStyle'>Designed and Coded By</h5>
                     <h5 className ='authorStyle'>Cristian C. Castillo</h5>
                 </div>
+            </div>
             </div>
         )
     }
