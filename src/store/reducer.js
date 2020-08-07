@@ -19,12 +19,6 @@ const EQUAL = 'EQUAL'
 const DECIMAL = 'DECIMAL'
 const SUBTRACT = 'SUBTRACT'
 
-/* check for zero */
-const notDivisible = 0
-
-/* Resets the Equal Sign for reuse*/
-let flag = false;
-
 /* default reducer state & array */
 const defaultState = {
     total:0,
@@ -194,7 +188,7 @@ const reducer = (state = defaultState,action) => {
                 }
             } 
             /* if n and n+1 is equal to - then just return unchanged*/
-            else if(state.numberArray[len-1] == opSub){
+            else if(state.numberArray[len-1] === opSub){
                 return{
                     ...state,
                     numberArray:state.numberArray
@@ -218,7 +212,7 @@ const reducer = (state = defaultState,action) => {
                 }
             }
             /* if n and n+1 is equal to + then just return unchanged*/
-            else if(state.numberArray[len-1] == opAdd){
+            else if(state.numberArray[len-1] === opAdd){
                 return{
                     ...state,
                     numberArray:state.numberArray
@@ -296,123 +290,122 @@ const reducer = (state = defaultState,action) => {
             }
         }
         case RESET:
-            /* Reset the flag for EQUAL*/
-            flag = false
             return{
-                total:state.total = 0,
-                numberArray:state.numberArray = [0]
+                ...defaultState,
+                total:state.total = valZero[0],
+                numberArray:[...valZero]
             }
         case ZERO:
-            if(state.numberArray[0] === valZero){
+            if(state.numberArray[0] === valZero[0]){
                 return{
                     ...state,
-                    numberArray:state.numberArray[0] = 0
+                    numberArray:state.numberArray[0] = valZero[0]
                 }
             }
             return{
                 ...state,
-                numberArray:state.numberArray.concat(valZero)
+                numberArray:state.numberArray.concat(valZero[0])
             }
         case ADDONE:
-            if(state.numberArray[0] === 0){
+            if(state.numberArray[0] === valZero[0]){
                 return{
                     ...state,
-                    numberArray:state.numberArray[0] = valOne
+                    numberArray:state.numberArray[0] = valOne[0]
                 }
             }
             else{
                 return{
                     ...state,
-                    numberArray:state.numberArray.concat(valOne)
+                    numberArray:state.numberArray.concat(valOne[0])
                 }
             }
         case ADDTWO:
-            if(state.numberArray[0] === 0){
+            if(state.numberArray[0] === valZero[0]){
                 return{
                     ...state,
-                    numberArray:state.numberArray[0] = valTwo
+                    numberArray:state.numberArray[0] = valTwo[0]
                 }
             }
             return{
                 ...state,
-                numberArray:state.numberArray.concat(valTwo)
+                numberArray:state.numberArray.concat(valTwo[0])
             }
         case ADDTHREE:
-            if(state.numberArray[0] === 0){
+            if(state.numberArray[0] === valZero[0]){
                 return{
                     ...state,
-                    numberArray:state.numberArray[0] = valThree
+                    numberArray:state.numberArray[0] = valThree[0]
                 }
             }
             return{
                 ...state,
-                numberArray:state.numberArray.concat(valThree)
+                numberArray:state.numberArray.concat(valThree[0])
             }
         case ADDFOUR:
-            if(state.numberArray[0] === 0){
+            if(state.numberArray[0] === valZero[0]){
                 return{
                     ...state,
-                    numberArray:state.numberArray[0] = valFour
+                    numberArray:state.numberArray[0] = valFour[0]
                 }
             }
             return{
                 ...state,
-                numberArray:state.numberArray.concat(valFour)
+                numberArray:state.numberArray.concat(valFour[0])
             }
         case ADDFIVE:
-            if(state.numberArray[0] === 0){
+            if(state.numberArray[0] === valZero[0]){
                 return{
                     ...state,
-                    numberArray:state.numberArray[0] = valFive
+                    numberArray:state.numberArray[0] = valFive[0]
                 }
             }
             return{
                 ...state,
-                numberArray:state.numberArray.concat(valFive)
+                numberArray:state.numberArray.concat(valFive[0])
             }
         case ADDSIX:
-            if(state.numberArray[0] === 0){
+            if(state.numberArray[0] === valZero[0]){
                 return{
                     ...state,
-                    numberArray:state.numberArray[0] = valSix
+                    numberArray:state.numberArray[0] = valSix[0]
                 }
             }
             return{
                 ...state,
-                numberArray:state.numberArray.concat(valSix)
+                numberArray:state.numberArray.concat(valSix[0])
             }
             case ADDSEVEN:
-                if(state.numberArray[0] === 0){
+                if(state.numberArray[0] === valZero[0]){
                     return{
                         ...state,
-                        numberArray:state.numberArray[0] = valSeven
+                        numberArray:state.numberArray[0] = valSeven[0]
                     }
                 }
                 return{
                     ...state,
-                    numberArray:state.numberArray.concat(valSeven)
+                    numberArray:state.numberArray.concat(valSeven[0])
                 }
             case ADDEIGHT:
-                if(state.numberArray[0] === 0){
+                if(state.numberArray[0] === valZero[0]){
                     return{
                         ...state,
-                        numberArray:state.numberArray[0] = valEight
+                        numberArray:state.numberArray[0] = valEight[0]
                     }
                 }
                 return{
                     ...state,
-                    numberArray:state.numberArray.concat(valEight)
+                    numberArray:state.numberArray.concat(valEight[0])
                 }
             case ADDNINE:
-                if(state.numberArray[0] === 0){
+                if(state.numberArray[0] === valZero[0]){
                     return{
                         ...state,
-                        numberArray:state.numberArray[0] = valNine
+                        numberArray:state.numberArray[0] = valNine[0]
                     }
                 }
                 return{
                     ...state,
-                    numberArray:state.numberArray.concat(valNine)
+                    numberArray:state.numberArray.concat(valNine[0])
                 }
             default:
                 return state
