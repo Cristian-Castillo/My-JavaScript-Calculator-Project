@@ -28,7 +28,7 @@ let flag = false;
 /* default reducer state & array */
 const defaultState = {
     total:0,
-    numberArray:[0]
+    numberArray:['0'],
 }
 
 /* Array of numbers to concat to state object */
@@ -95,14 +95,13 @@ const reducer = (state = defaultState,action) => {
                     emptyStr = ''
                 }
             }
-
+            /* Convert str to float */
             subContainer.push(parseFloat(emptyStr))
             emptyStr = '';
-            console.log(subContainer)
 
             /* Begin math logic operations */
             const subLen = subContainer.length
-            /* Pemdas in Action for mult and div */
+            /* Pemdas in Action for mult and div*/
             for(let j = 0; j < subLen;j++){
             
                 if((j % 2) !== 0){
@@ -124,8 +123,8 @@ const reducer = (state = defaultState,action) => {
                 }
             }
 
-                for(let j = 0; j < subLen;j++){
-            
+            for(let j = 0; j < subLen;j++){
+        
                 if((j % 2) !== 0){
                     
                     if(subContainer[j] === '*'){
@@ -258,7 +257,6 @@ const reducer = (state = defaultState,action) => {
             }
         }
         case DECIMAL:{
-            const len = state.numberArray.length;
             
             if(state.numberArray[0] === 0){
                 return{
@@ -305,6 +303,12 @@ const reducer = (state = defaultState,action) => {
                 numberArray:state.numberArray = [0]
             }
         case ZERO:
+            if(state.numberArray[0] === valZero){
+                return{
+                    ...state,
+                    numberArray:state.numberArray[0] = 0
+                }
+            }
             return{
                 ...state,
                 numberArray:state.numberArray.concat(valZero)
