@@ -1,6 +1,8 @@
 :root{
     --customGray:rgb(193, 196, 211);
     --genericButton:#4d4d4d;
+    --darkGray:#636571;
+    
 }
 
 .App-header {
@@ -16,14 +18,70 @@
 
 button{
   text-align: center !important;
-  outline:0;
+  outline:none !important;
+  border:none !important;
+  color:white;
+  background-color:var(--darkGray);
+  animation-name: colorful;
+  animation-duration: 3s;
 }
 
-/* .col-3:hover,button:hover{
-  background-color:#636571 !important;
-  border-radius:25px;
-  outline:0;
-} */
+@keyframes colorful {
+  0%{
+    background-color:yellowgreen !important;
+  }
+  25%{
+    background-color:fuchsia !important;
+  }
+
+  30%{
+    background-color:fuchsia !important;
+  }
+
+  40%{
+    background-color:fuchsia !important;
+  }
+
+  45%{
+    background-color:fuchsia !important;
+  }
+
+  50%{
+    background-color:fuchsia !important;
+  }
+
+  55%{
+    background-color:fuchsia !important;
+  }
+  60%{
+    background-color:fuchsia !important;
+  }
+
+  65%{
+    background-color:fuchsia !important;
+  }
+  70%{
+    background-color:fuchsia !important;
+  }
+
+  75%{
+    background-color:fuchsia !important;
+  }
+
+  85%{
+    background-color:fuchsia !important;
+  }
+
+  100%{
+    background-color:fuchsia !important;
+  }
+}
+
+button:hover{
+  /* background-color:white !important; */
+  /* border-radius:50px; */
+  color:black;
+}
 
 .row{
   padding-left:2.5px;
@@ -34,17 +92,18 @@ button{
 .container{
   width:250px;
   background-color:black;
-  
 }
 
 .col-result-layout{
     text-align:right;
+    background-color:black !important;
 }
 
 .col-subresult{
     font-size:15px;
     color:orange;
     padding-top:3px;
+    background-color:black !important;
 }
 
 .ac-div{
@@ -56,48 +115,43 @@ button{
     border:none;
     color:white;
     background-color:rgb(221, 62, 97);
+    transition-delay:5s;
 }
 
-/* .ac-style:hover{
+.ac-style:hover{
   background-color:rgb(255, 5, 60) !important;
-  width:95px;
-  margin-left:-14px;
-}
+  transition-delay:5s;
+} 
 
 .ac-div:hover{
-  background-color:#636571 !important;
-  border-radius:25px;
-  outline:0;
-} */
-
-.division-style{
-  background-color:var(--customGray);
-  color:white;
-  border-style:none;
-}
-
-/* .division-style:hover{
-  background-color:#636571 !important;
-} */
+  background-color:rgb(255, 5, 60) !important;
+  transition-delay:5s;
+} 
 
 .mult-style{
   border-style:none;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:white;
-  margin-left:-1px;
+  transition-delay:5s;
+  
 }
 
 .dig-seven{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
 }
 
+.dig-seven:hover{
+  color:black;
+  
+}
+
 .dig-eight{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
@@ -105,7 +159,7 @@ button{
 
 .dig-nine{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
@@ -113,7 +167,7 @@ button{
 
 .op-sub{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
@@ -121,7 +175,7 @@ button{
 
 .dig-four{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
@@ -129,7 +183,7 @@ button{
 
 .dig-five{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
@@ -137,7 +191,7 @@ button{
 
 .dig-six{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
@@ -145,7 +199,7 @@ button{
 
 .op-add{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-2px;
   border-style:none;
@@ -153,7 +207,7 @@ button{
 
 .dig-one{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
@@ -161,22 +215,21 @@ button{
 
 .dig-two{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
 }
 
 .dig-three{
-  border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-1px;
   border-style:none;
 }
 
 .op-equal{
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   margin-left:-4px;
   border-style:none;
@@ -185,52 +238,37 @@ button{
   width:25.8px;
 }
 .op-equalDiv{
-  background-color:var(--customGray) !important;
+  background-color:var(--darkGray) !important;
   border:.1px solid black;
   position:relative;
+  color:white;
 }
-
-/* .op-equalDiv:hover{
-  background-color:#636571 !important;
-  border-radius:55px !important;
-  outline:0;
-} */
 
 .dig-zero{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   border-style:none;
 }
 
 .dig-zeroDiv{
-  background-color:rgb(193, 196, 211);
-  border:.1px solid black;
+  background-color:var(--darkGray);
+    border:.5px solid black;
 }
-
-/* .dig-zeroDiv:hover{
-  background-color:#636571 !important;
-  border-radius:25px;
-  outline:0;
-} */
 
 .op-dec{
   border:.5px solid black;
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   color:#ffffff;
   border-style:none;
 }
 
 .deadCell{
-  background-color:var(--customGray);
+  background-color:var(--darkGray);
   cursor:not-allowed;
   border:.1px solid black;
   width:61px;
 }
-
-/* .deadCell:hover,.col-3:hover{
-  background-color:none !important;  
-} */
 
 .authorDiv{
   background-color:#c1d6ec;
@@ -248,4 +286,37 @@ button{
   border-left:none;
   border-right:none;
   border-bottom:none;
+}
+/* Row corner lights */
+
+.r1:hover{
+  background-color:cyan !important;
+  transition-delay:.07s;
+}
+.r2:hover{
+  background-color:rgb(221, 62, 97) !important;
+  transition-delay:.07s;
+}
+.r3:hover{
+  background-color:#3e57e8 !important;
+  transition-delay:.07s;
+}
+.r4:hover{
+  background-color: rgb(126 239 135) !important;
+  transition-delay:.07s;
+}
+
+.r5:hover{
+  background-color:rgb(250 253 83) !important;
+  transition-delay:.07s;
+}
+
+.r6{
+  background-color:black !important;
+  transition-delay:.07s;
+}
+
+.r6:hover{
+  background-color:black !important;
+  transition-delay:.07s;
 }

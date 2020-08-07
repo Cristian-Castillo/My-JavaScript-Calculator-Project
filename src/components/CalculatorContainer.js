@@ -29,8 +29,8 @@ class CalculatorContainer extends Component {
 
         /*Button styling */
         const styleButton = {
-            backgroundColor:'rgb(193, 196, 211)',
-            border:'.1px solid black'
+            border:'.1px solid black',
+            background:'var(--darkGray)'
         }
         /* JSX Calculator Container*/
         return(
@@ -39,30 +39,30 @@ class CalculatorContainer extends Component {
         <div className="col-12 col-subresult">{displayArray[0] === '0' ? displayResult : displayArray}</div>
                     <div className="col-12 ">{displayResult}</div>
                 </div>
-                <div className="row">
+                <div className="row r1">
                     <div className="col-6 ac-div" ><button className ='ac-style' onClick = {setReset}>AC</button></div>
                     <div className="col-3" style= {styleButton}><button className = 'division-style' onClick ={setDiv}>/</button></div>
                     <div className="col-3" style= {styleButton}><button className ='mult-style' onClick ={setMultiply}>x</button></div>
                 </div>
-                <div className="row">
+                <div className="row r2">
                     <div className="col-3" style= {styleButton}><button className='dig-seven' onClick ={addSeven}>7</button></div>
                     <div className="col-3" style= {styleButton}><button className='dig-eight' onClick ={addEight}>8</button></div>
                     <div className="col-3" style= {styleButton}><button className='dig-nine' onClick ={addNine}>9</button></div>
                     <div className="col-3" style= {styleButton}><button className='op-sub' onClick ={setSubtract}>-</button></div>
                 </div>
-                <div className="row">
+                <div className="row r3">
                     <div style= {styleButton} className="col-3"><button className='dig-four' onClick ={addFour}>4</button></div>
                     <div style= {styleButton} className="col-3"><button className='dig-five' onClick ={addFive}>5</button></div>
                     <div style= {styleButton} className="col-3"><button className='dig-six' onClick ={addSix}>6</button></div>
                     <div style= {styleButton} className="col-3"><button className='op-add' onClick ={setAdd}>+</button></div>
                 </div>
-                <div className="row">
+                <div className="row r4">
                     <div style= {styleButton} className="col-3"><button className='dig-one' onClick = {addOne}>1</button></div>
                     <div style= {styleButton} className="col-3"><button className='dig-two' onClick ={addTwo}>2</button></div>
                     <div style= {styleButton} className="col-3"><button className='dig-three' onClick ={addThree}>3</button></div>
                     <div className="col-3 op-equalDiv"><button className='op-equal' onClick ={setEqual}>=</button></div>
                 </div>
-                <div style = {{paddingBottom:'2px'}} className="row">
+                <div style = {{paddingBottom:'2px'}} className="row r5">
                     <div className="col-6 dig-zeroDiv"><button className='dig-zero' onClick ={addZero}>0</button></div>
                     <div style= {styleButton} className="col-3"><button className='op-dec' onClick ={setDecimal}>.</button></div>
                     <div className='deadCell'>JS</div>
