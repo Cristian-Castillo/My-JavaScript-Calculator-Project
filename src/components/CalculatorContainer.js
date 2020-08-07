@@ -9,7 +9,6 @@ class CalculatorContainer extends Component {
         /* Declared const to hold props from store */
         const displayResult = this.props.storeTotal
         const displayArray = this.props.storeArray
-        const displayError = this.props.storeError
         const setDiv = this.props.division
         const setAdd = this.props.add
         const setReset = this.props.reset
@@ -46,13 +45,13 @@ class CalculatorContainer extends Component {
                 </div>
             <div className="container">
                 <div className="row col-result-layout">
-        <div className="col-12 col-subresult">{displayArray[0] === '0' ? displayResult : displayArray}</div>
-                    <div className="col-12 ">{displayArray.length > 20 ? displayError : displayResult}</div>
+            <div className="col-12 col-subresult">{displayArray[0] === '0' ? displayResult : displayArray}</div>
+                    <div className="col-12 ">{displayResult}</div>
                 </div>
                 <div className="row r1">
                     <div className="col-6 ac-div" ><button className ='ac-style' onClick = {setReset}>AC</button></div>
                     <div className="col-3" style= {styleButton}><button className = 'division-style' onClick ={setDiv}>/</button></div>
-                    <div className="col-3" style= {styleButton}><button className ='mult-style' onClick ={setMultiply}>x</button></div>
+                    <div className="col-3 multi" style= {styleButton}><button className ='mult-style' onClick ={setMultiply}>x</button></div>
                 </div>
                 <div className="row r2">
                     <div className="col-3" style= {styleButton}><button className='dig-seven' onClick ={addSeven}>7</button></div>
@@ -75,7 +74,7 @@ class CalculatorContainer extends Component {
                 <div style = {{paddingBottom:'2px'}} className="row r5">
                     <div className="col-6 dig-zeroDiv"><button className='dig-zero' onClick ={addZero}>0</button></div>
                     <div style= {styleButton} className="col-3"><button className='op-dec' onClick ={setDecimal}>.</button></div>
-                    <div className='deadCell'><button className = 'op-dec ' onClick ={setEqual}>Enter</button></div>
+                    <div className='deadCell'><button className = 'op-enter' onClick ={setEqual}>Enter</button></div>
                 </div>
                 <div className ='authorDiv'>
                     <br></br>
@@ -92,7 +91,6 @@ const mapStateToProps = (state) => {
     return{
         storeTotal:state.total,
         storeArray:state.numberArray,
-        storeError:state.error
     }
 }
 /* anonymous ascynch function dispatching the action creator

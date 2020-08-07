@@ -22,7 +22,6 @@ button{
   color:white;
   background-color:var(--darkGray);
   animation-name: colorful;
-  animation-duration: 3s;
 }
 
 button:hover{
@@ -33,6 +32,7 @@ button:hover{
   padding-left:2.5px;
   padding-right:2.5px;
   text-align:center;
+  
 }
 
 .container{
@@ -50,6 +50,8 @@ button:hover{
     color:orange;
     padding-top:3px;
     background-color:black !important;
+    width:180px;
+  
 }
 
 .ac-div{
@@ -61,25 +63,33 @@ button:hover{
     border:none;
     color:white;
     background-color:rgb(221, 62, 97);
-    transition-delay:5s;
+    transition-delay:.3s;
 }
 
 .ac-style:hover{
   background-color:rgb(255, 5, 60) !important;
-  transition-delay:5s;
+  transition-delay:.2s;
 } 
 
 .ac-div:hover{
   background-color:rgb(255, 5, 60) !important;
-  transition-delay:5s;
+  transition-delay:.2s;
 } 
 
 .mult-style{
   border-style:none;
   background-color:var(--darkGray);
   color:white;
-  transition-delay:5s;
 }
+
+.mult-style:hover{
+    color:black !important;
+}
+
+.multi:hover{
+  color:black !important;
+}
+
 
 .dig-seven{
   border:.5px solid black;
@@ -173,7 +183,7 @@ button:hover{
 }
 
 .op-equal{
-  background-color:var(--darkGray);
+  background-color:rgb(1, 89, 133) !important;
   color:#ffffff;
   margin-left:-4px;
   border-style:none;
@@ -184,7 +194,7 @@ button:hover{
 
 }
 .op-equalDiv{
-  background-color:var(--darkGray) !important;
+  background-color:rgb(1, 89, 133) !important;
   border:.1px solid black;
   position:relative;
   color:white;
@@ -210,8 +220,15 @@ button:hover{
   border-style:none;
 }
 
+.op-enter{
+  background-color:rgb(1, 89, 133) !important;
+  border:.5px solid black;
+  color:#ffffff;
+  border-style:none;
+}
+
 .deadCell{
-  background-color:var(--darkGray);
+  background-color:rgb(1, 89, 133) !important;
   cursor:pointer;
   border:.1px solid black;
   width:61.24px;
