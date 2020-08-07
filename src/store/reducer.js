@@ -54,6 +54,7 @@ const reducer = (state = defaultState,action) => {
 
     const copyArray = [...state.numberArray]
     let subContainer = []
+    let resultingArray = []
 
     switch(action.type){
 
@@ -75,17 +76,19 @@ const reducer = (state = defaultState,action) => {
                     subContainer.push('+')
                     emptyStr = ''
                 }
-
+                /* Check Sub, and push reset str */
                 if(copyArray[i] === '-'){
                     subContainer.push(parseFloat(emptyStr))
                     subContainer.push('-')
                     emptyStr = ''
                 }
+                /* Check Mult, and push reset str */
                 if(copyArray[i] === opMult[0]){
                     subContainer.push(parseFloat(emptyStr))
                     subContainer.push('*')
                     emptyStr = ''
                 }
+                /* Check Div, and push reset str */
                 if(copyArray[i] === opDiv[0]){
                     subContainer.push(parseFloat(emptyStr))
                     subContainer.push('/')
@@ -96,25 +99,87 @@ const reducer = (state = defaultState,action) => {
             subContainer.push(parseFloat(emptyStr))
             emptyStr = '';
             console.log(subContainer)
-            /* Checkpoint all symbols register at this point */
 
             /* Begin math logic operations */
             const subLen = subContainer.length
-
+            /* Pemdas in Action for mult and div */
             for(let j = 0; j < subLen;j++){
-
-                if(subContainer[j] === '+'){
-                    accumulator += subContainer[j-1]
-                }
-                /* We have reached end of container add/sub/mult/etc to end*/
-                else if(subLen-1 === j){
+            
+                if((j % 2) !== 0){
                     
-                    if(subContainer[subLen-2] === '+'){
-                        accumulator += subContainer[subLen-1]
+                    if(subContainer[j] === '*'){
+                        accumulator = subContainer[j-1]*subContainer[j+1]
+                        subContainer[j-1] = 'x'
+                        subContainer[j] ='x'
+                        subContainer[j+1] = accumulator
+                        accumulator = 0
+                    }
+                    if(subContainer[j] === '/'){
+                        accumulator = subContainer[j-1]/subContainer[j+1]
+                        subContainer[j-1] = 'x'
+                        subContainer[j] ='x'
+                        subContainer[j+1] = accumulator
+                        accumulator = 0
                     }
                 }
             }
-            /* Return the updated state and display to store */
+
+                for(let j = 0; j < subLen;j++){
+            
+                if((j % 2) !== 0){
+                    
+                    if(subContainer[j] === '*'){
+                        accumulator = subContainer[j-1]*subContainer[j+1]
+                        subContainer[j-1] = 'x'
+                        subContainer[j] ='x'
+                        subContainer[j+1] = accumulator
+                        accumulator = 0
+                    }
+                    if(subContainer[j] === '/'){
+                        accumulator = subContainer[j-1]/subContainer[j+1]
+                        subContainer[j-1] = 'x'
+                        subContainer[j] ='x'
+                        subContainer[j+1] = accumulator
+                        accumulator = 0
+                    }
+                }
+            }
+            /* Remove dummy data x from array */
+            for(let i = 0; i < subLen;i++){
+                if(subContainer[i] !== 'x'){
+                    resultingArray.push(subContainer[i])
+                }
+            }
+            /* Pemdas in Action for add and sub */
+            for(let j = 0; j < resultingArray.length;j++){
+            
+                if((j % 2) !== 0){
+                    
+                    if(resultingArray[j] === '+'){
+                        accumulator = resultingArray[j-1]+resultingArray[j+1]
+                        resultingArray[j-1] = 'x'
+                        resultingArray[j] ='x'
+                        resultingArray[j+1] = accumulator
+                        accumulator = 0
+                    }
+                    if(resultingArray[j] === '-'){
+                        accumulator = resultingArray[j-1]-resultingArray[j+1]
+                        resultingArray[j-1] = 'x'
+                        resultingArray[j] ='x'
+                        resultingArray[j+1] = accumulator
+                        accumulator = 0
+                    }
+                }
+            }
+            accumulator = 0
+            /* Remove dummy data x from array and store result*/
+            for(let i = 0; i < resultingArray.length;i++){
+
+                if(resultingArray[i] !== 'x'){
+                    accumulator = resultingArray[i]
+                }
+            }
+            /* Return result! */
             return{
                 ...state,
                 total:state.total = accumulator,
