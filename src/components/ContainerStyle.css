@@ -19,11 +19,11 @@ button{
   outline:0;
 }
 
-.col-3:hover,button:hover{
+/* .col-3:hover,button:hover{
   background-color:#636571 !important;
   border-radius:25px;
   outline:0;
-}
+} */
 
 .row{
   padding-left:2.5px;
@@ -32,7 +32,7 @@ button{
 }
 
 .container{
-  width:200px;
+  width:250px;
   background-color:black;
   
 }
@@ -58,7 +58,7 @@ button{
     background-color:rgb(221, 62, 97);
 }
 
-.ac-style:hover{
+/* .ac-style:hover{
   background-color:rgb(255, 5, 60) !important;
   width:95px;
   margin-left:-14px;
@@ -68,7 +68,7 @@ button{
   background-color:#636571 !important;
   border-radius:25px;
   outline:0;
-}
+} */
 
 .division-style{
   background-color:var(--customGray);
@@ -225,7 +225,7 @@ button{
   background-color:var(--customGray);
   cursor:not-allowed;
   border:.1px solid black;
-  width:48.7px;
+  width:61px;
 }
 
 .deadCell:hover,.col-3:hover{
@@ -234,7 +234,7 @@ button{
 
 .authorDiv{
   background-color:#c1d6ec;
-  width:200px;
+  width:250px;
   margin-left:-15px;
   padding-bottom:10px;
   border-left:none;
