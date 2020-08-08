@@ -87,7 +87,7 @@ const reducer = (state = defaultState,action) => {
                     if(copyArray[i] === '-' && copyArray[i+1] === '+'){
                         return{
                             ...state,
-                             numberArray:NAN
+                            numberArray:NAN
                         }
                     }
                     if(copyArray[i] !== '•'){
@@ -102,11 +102,20 @@ const reducer = (state = defaultState,action) => {
                 for(let i = 0; i < subContainer.length;i++){
                     emptyStr += subContainer[i]
                 }
-                accumulator = eval(emptyStr)
-                return{
-                    ...state,
-                    total:accumulator
+                try{ /* If sequence of characters entered wrong ***, or -+, etc // */
+                    accumulator = eval(emptyStr)
+                    return{
+                        ...state,
+                        total:accumulator
+                    }
                 }
+                catch{
+                    return{
+                        ...state,
+                        numberArray:NAN
+                    }
+                }
+                
             }
             case SUBTRACT:{
                 const len = state.numberArray.length;
