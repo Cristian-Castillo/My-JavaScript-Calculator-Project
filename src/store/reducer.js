@@ -113,7 +113,8 @@ const reducer = (state = defaultState,action) => {
     
                 /* Begin math logic operations */
                 const subLen = subContainer.length
-                /* Pemdas in Action for mult and div*/
+                
+                /* Pemdas in Action for MULT and DIV*/
                 for(let j = 0; j < subLen;j++){
                 
                     if((j % 2) !== 0){
@@ -132,12 +133,17 @@ const reducer = (state = defaultState,action) => {
                             subContainer[j+1] = accumulator
                             accumulator = 0
                         }
+                        
                     }
                 }
+
                 for(let j = 0; j < subLen;j++){
-            
+                    
                     if((j % 2) !== 0){
                         
+                        if(subContainer[j] === NaN){
+                            subContainer[j] = 'x'
+                        }
                         if(subContainer[j] === '*'){
                             accumulator = subContainer[j-1]*subContainer[j+1]
                             subContainer[j-1] = 'x'
@@ -154,15 +160,18 @@ const reducer = (state = defaultState,action) => {
                         }
                     }
                 }
+
                 /* Remove dummy data x from array */
                 for(let i = 0; i < subLen;i++){
                     if(subContainer[i] !== 'x'){
                         resultingArray.push(subContainer[i])
                     }
                 }
-                /* Pemdas in Action for add and sub */
-                console.log(resultingArray)
+
+                /* Pemdas in Action for ADD and SUB */
+
                 for(let j = 0; j < resultingArray.length;j++){
+
                 
                     if((j % 2) !== 0){
                         
@@ -179,16 +188,41 @@ const reducer = (state = defaultState,action) => {
                             resultingArray[j] ='x'
                             resultingArray[j+1] = accumulator
                             accumulator = 0
-                            // accumulator = -1*resultingArray[j+1]
-                            // resultingArray[j-1] = 'x'
-                            // resultingArray[j] ='x'
-                            // resultingArray[j+1] = accumulator
-                            // accumulator = 0
                         }
                     }
-                }       
-                console.log(resultingArray)
+                    /* Else we only check if  n = 0, 2 , 4 starting pos for
+                    neg symbol and create a negative value */
+                    if((j % 2 === 0)){
+                        console.log('TEST: '+resultingArray)
+                        if(resultingArray[j+1] === '-'){
+                            console.log('oksdf ' )
+                            resultingArray[j] = 'x'
+                            resultingArray[j+1] = 'x'
+                            accumulator = resultingArray[j+2]*-1
+                            resultingArray[j+2] = accumulator
+                            accumulator = 0
 
+                            switch(resultingArray[j+3]){
+                                case '+':
+                                    resultingArray[j+3] = 'x'
+                                    resultingArray[j+4] = resultingArray[j+2]+resultingArray[j+4]
+                                    break
+                                case '-':
+                                    resultingArray[j+3] = 'x'
+                                    resultingArray[j+4] = resultingArray[j+2]-resultingArray[j+4]
+                                    break;
+                                case '*':
+                                    resultingArray[j+3] = 'x'
+                                    resultingArray[j+4] = resultingArray[j+2]*resultingArray[j+4]
+                                    break;
+                                case '/':
+                                    resultingArray[j+3] = 'x'
+                                    resultingArray[j+4] = resultingArray[j+2]/resultingArray[j+4]
+                                    break;
+                            }
+                        }
+                    }
+                }  
                 accumulator = 0
                 /* Remove dummy data x from array and store result*/
                 for(let i = 0; i < resultingArray.length;i++){
