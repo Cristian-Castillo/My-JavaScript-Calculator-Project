@@ -264,6 +264,7 @@ const reducer = (state = defaultState,action) => {
                 }
             }
             else{
+
                 /* Check to see if we have consecutive decimal inputs*/
                 for(let i = 0; i < state.numberArray.length;i++){
                     if(state.numberArray[i] === '.' && state.numberArray[i+1] === '.'){
