@@ -26,6 +26,9 @@ const defaultState = {
     numberArray:['0'],
 }
 
+/* Check Len of Digits/math ops - not to exceed set length */
+const DIGITLENGTH = 'DIGIT LIMITS EXCEEDED!'
+
 /* Array of numbers to concat to state object */
 const valZero = ['0'];
 const valOne = ['1'];
@@ -46,392 +49,407 @@ const opAdd = ['+'];
 const reducer = (state = defaultState,action) => {
 
     const copyArray = [...state.numberArray]
-    let subContainer = []
-    let resultingArray = []
+    let subContainer = [], resultingArray = []
 
-    switch(action.type){
-
-        case EQUAL:{
-            
-            const len = copyArray.length
-            let emptyStr = ''
-            let accumulator = 0
-
-            /* If Enter is hit first as input then display not a number */
-            if(action.type === EQUAL && state.numberArray[0] === valZero[0]){
-                return{
-                    ...state,
-                    total:NAN
-                }
-            }
-            /* Group numbers and isolate math operands */
-            for(let i = 0; i < len;i++){
-
-                /* Check Addition */
-                if(copyArray[i] !== opAdd[0]){
-                    emptyStr += copyArray[i]
-                }
-                else if(copyArray[i] === '+'){
-                    subContainer.push(parseFloat(emptyStr))
-                    subContainer.push('+')
-                    emptyStr = ''
-                }
-                /* Check Sub, and push reset str */
-                if(copyArray[i] === opSub[0]){
-                    subContainer.push(parseFloat(emptyStr))
-                    subContainer.push(opSub[0])
-                    emptyStr = ''
-                }
-                /* Check Mult, and push reset str */
-                if(copyArray[i] === opMult[0]){
-                    subContainer.push(parseFloat(emptyStr))
-                    subContainer.push('*')
-                    emptyStr = ''
-                }
-                /* Check Div, and push reset str */
-                if(copyArray[i] === opDiv[0]){
-                    subContainer.push(parseFloat(emptyStr))
-                    subContainer.push('/')
-                    emptyStr = ''
-                }
-            }
-            /* Convert str to float */
-            subContainer.push(parseFloat(emptyStr))
-            emptyStr = '';
-
-            /* Begin math logic operations */
-            const subLen = subContainer.length
-            /* Pemdas in Action for mult and div*/
-            for(let j = 0; j < subLen;j++){
-            
-                if((j % 2) !== 0){
-                    
-                    if(subContainer[j] === '*'){
-                        accumulator = subContainer[j-1]*subContainer[j+1]
-                        subContainer[j-1] = 'x'
-                        subContainer[j] ='x'
-                        subContainer[j+1] = accumulator
-                        accumulator = 0
-                    }
-                    if(subContainer[j] === '/'){
-                        accumulator = subContainer[j-1]/subContainer[j+1]
-                        subContainer[j-1] = 'x'
-                        subContainer[j] ='x'
-                        subContainer[j+1] = accumulator
-                        accumulator = 0
-                    }
-                }
-            }
-
-            for(let j = 0; j < subLen;j++){
-        
-                if((j % 2) !== 0){
-                    
-                    if(subContainer[j] === '*'){
-                        accumulator = subContainer[j-1]*subContainer[j+1]
-                        subContainer[j-1] = 'x'
-                        subContainer[j] ='x'
-                        subContainer[j+1] = accumulator
-                        accumulator = 0
-                    }
-                    if(subContainer[j] === '/'){
-                        accumulator = subContainer[j-1]/subContainer[j+1]
-                        subContainer[j-1] = 'x'
-                        subContainer[j] ='x'
-                        subContainer[j+1] = accumulator
-                        accumulator = 0
-                    }
-                }
-            }
-            /* Remove dummy data x from array */
-            for(let i = 0; i < subLen;i++){
-                if(subContainer[i] !== 'x'){
-                    resultingArray.push(subContainer[i])
-                }
-            }
-            /* Pemdas in Action for add and sub */
-            for(let j = 0; j < resultingArray.length;j++){
-            
-                if((j % 2) !== 0){
-                    
-                    if(resultingArray[j] === '+'){
-                        accumulator = resultingArray[j-1]+resultingArray[j+1]
-                        resultingArray[j-1] = 'x'
-                        resultingArray[j] ='x'
-                        resultingArray[j+1] = accumulator
-                        accumulator = 0
-                    }
-                    if(resultingArray[j] === '-'){
-                        accumulator = resultingArray[j-1]-resultingArray[j+1]
-                        resultingArray[j-1] = 'x'
-                        resultingArray[j] ='x'
-                        resultingArray[j+1] = accumulator
-                        accumulator = 0
-                    }
-                }
-            }
-            accumulator = 0
-            /* Remove dummy data x from array and store result*/
-            for(let i = 0; i < resultingArray.length;i++){
-
-                if(resultingArray[i] !== 'x'){
-                    accumulator = resultingArray[i]
-                }
-            }
-            /* Return result! */
-            return{
-                ...state,
-                total:state.total = accumulator,
-            }
+    /* If over 23 characters, maximun reached reset*/
+    if(state.numberArray === DIGITLENGTH){
+        return{
+            ...state,
+            total:state.total = 0,
+            numberArray:['0']
         }
-        case SUBTRACT:{
-            const len = state.numberArray.length;
-            /* If first entry is - then change to sub */
-            if(state.numberArray[0] === 0){
-                return{
-                    ...state,
-                    numberArray:state.numberArray[0] = opSub
-                }
-            } 
-            /* if n and n+1 is equal to - then just return unchanged*/
-            else if(state.numberArray[len-1] === opSub){
-                return{
-                    ...state,
-                    numberArray:state.numberArray
-                }
-            }
-            /* Else n and n+1 in array are different and concat */
-            else{
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(opSub)
-                }
-            }
-        }
-        case ADD:{
-            const len = state.numberArray.length;
-            /* If first entry is + then change to sub */
-            if(state.numberArray[0] === 0){
-                return{
-                    ...state,
-                    numberArray:state.numberArray[0] = opAdd
-                }
-            }
-            /* if n and n+1 is equal to + then just return unchanged*/
-            else if(state.numberArray[len-1] === opAdd){
-                return{
-                    ...state,
-                    numberArray:state.numberArray
-                }
-            }
-            /* Else n and n+1 in array are different and concat */
-            else{
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(opAdd)
-                }
-            }
-        }
-        case MULTIPLY:{
-            const len = state.numberArray.length;
-            /* If first entry is * then change to mult */
-            if(state.numberArray[0] === 0){
-                return{
-                    ...state,
-                    numberArray:state.numberArray
-                }
-            } 
-            /* if n and n+1 is equal to * then just return unchanged */
-            else if(state.numberArray[len-1] === opMult){
-                return{
-                    ...state,
-                    numberArray:state.numberArray
-                }
-            }
-            /* Else n and n+1 in array are different and concat */
-            else{
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(opMult)
-                }
-            }
-        }
-        case DECIMAL:{
-            if(state.numberArray[0] === valZero[0]){
-                return{
-                    ...state,
-                    numberArray:state.numberArray = '.'
-                }
-            }
-            else{
+    }
+    /* 32 bit */
+    if(state.numberArray.length < 32){
+        switch(action.type){
 
-                /* Check to see if we have consecutive decimal inputs*/
-                for(let i = 0; i < state.numberArray.length;i++){
-
-                    if(state.numberArray[0] === '.' && state.numberArray[1] === '.'){
-                        return{
-                            ...state,
-                            numberArray:NAN
+            case EQUAL:{
+                
+                const len = copyArray.length
+                let emptyStr = ''
+                let accumulator = 0
+    
+                /* If Enter is hit first as input then display not a number */
+                if(action.type === EQUAL && state.numberArray[0] === valZero[0]){
+                    return{
+                        ...state,
+                        total:NAN
+                    }
+                }
+                /* Group numbers and isolate math operands */
+                for(let i = 0; i < len;i++){
+    
+                    /* Check Addition */
+                    if(copyArray[i] !== opAdd[0]){
+                        emptyStr += copyArray[i]
+                    }
+                    else if(copyArray[i] === opAdd[0]){
+                        subContainer.push(parseFloat(emptyStr))
+                        subContainer.push(opAdd[0])
+                        emptyStr = ''
+                    }
+                    /* Check Sub, and push reset str */
+                    if(copyArray[i] === opSub[0]){
+                        subContainer.push(parseFloat(emptyStr))
+                        subContainer.push(opSub[0])
+                        emptyStr = ''
+                    }
+                    /* Check Mult, and push reset str */
+                    if(copyArray[i] === opMult[0]){
+                        subContainer.push(parseFloat(emptyStr))
+                        subContainer.push(opMult[0])
+                        emptyStr = ''
+                    }
+                    /* Check Div, and push reset str */
+                    if(copyArray[i] === opDiv[0]){
+                        subContainer.push(parseFloat(emptyStr))
+                        subContainer.push(opDiv[0])
+                        emptyStr = ''
+                    }
+                }
+                /* Convert str to float */
+                subContainer.push(parseFloat(emptyStr))
+                emptyStr = '';
+    
+                /* Begin math logic operations */
+                const subLen = subContainer.length
+                /* Pemdas in Action for mult and div*/
+                for(let j = 0; j < subLen;j++){
+                
+                    if((j % 2) !== 0){
+                        
+                        if(subContainer[j] === '*'){
+                            accumulator = subContainer[j-1]*subContainer[j+1]
+                            subContainer[j-1] = 'x'
+                            subContainer[j] ='x'
+                            subContainer[j+1] = accumulator
+                            accumulator = 0
                         }
-                    }
-                    if(state.numberArray[i] === '.' && state.numberArray[i+1] === '.'){
-                        return{
-                            ...state,
-                            numberArray:NAN
+                        if(subContainer[j] === '/'){
+                            accumulator = subContainer[j-1]/subContainer[j+1]
+                            subContainer[j-1] = 'x'
+                            subContainer[j] ='x'
+                            subContainer[j+1] = accumulator
+                            accumulator = 0
                         }
                     }
                 }
+    
+                for(let j = 0; j < subLen;j++){
+            
+                    if((j % 2) !== 0){
+                        
+                        if(subContainer[j] === '*'){
+                            accumulator = subContainer[j-1]*subContainer[j+1]
+                            subContainer[j-1] = 'x'
+                            subContainer[j] ='x'
+                            subContainer[j+1] = accumulator
+                            accumulator = 0
+                        }
+                        if(subContainer[j] === '/'){
+                            accumulator = subContainer[j-1]/subContainer[j+1]
+                            subContainer[j-1] = 'x'
+                            subContainer[j] ='x'
+                            subContainer[j+1] = accumulator
+                            accumulator = 0
+                        }
+                    }
+                }
+                /* Remove dummy data x from array */
+                for(let i = 0; i < subLen;i++){
+                    if(subContainer[i] !== 'x'){
+                        resultingArray.push(subContainer[i])
+                    }
+                }
+                /* Pemdas in Action for add and sub */
+                for(let j = 0; j < resultingArray.length;j++){
+                
+                    if((j % 2) !== 0){
+                        
+                        if(resultingArray[j] === '+'){
+                            accumulator = resultingArray[j-1]+resultingArray[j+1]
+                            resultingArray[j-1] = 'x'
+                            resultingArray[j] ='x'
+                            resultingArray[j+1] = accumulator
+                            accumulator = 0
+                        }
+                        if(resultingArray[j] === '-'){
+                            accumulator = resultingArray[j-1]-resultingArray[j+1]
+                            resultingArray[j-1] = 'x'
+                            resultingArray[j] ='x'
+                            resultingArray[j+1] = accumulator
+                            accumulator = 0
+                        }
+                    }
+                }
+                accumulator = 0
+                /* Remove dummy data x from array and store result*/
+                for(let i = 0; i < resultingArray.length;i++){
+    
+                    if(resultingArray[i] !== 'x'){
+                        accumulator = resultingArray[i]
+                    }
+                }
+                /* Return result! */
                 return{
                     ...state,
-                    numberArray:state.numberArray.concat(opDec[0])
+                    total:state.total = accumulator,
                 }
             }
+            case SUBTRACT:{
+                const len = state.numberArray.length;
+                /* If first entry is - then change to sub */
+                if(state.numberArray[0] === 0){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray[0] = opSub
+                    }
+                } 
+                /* if n and n+1 is equal to - then just return unchanged*/
+                else if(state.numberArray[len-1] === opSub){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray
+                    }
+                }
+                /* Else n and n+1 in array are different and concat */
+                else{
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(opSub)
+                    }
+                }
+            }
+            case ADD:{
+                const len = state.numberArray.length;
+                /* If first entry is + then change to sub */
+                if(state.numberArray[0] === 0){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray[0] = opAdd
+                    }
+                }
+                /* if n and n+1 is equal to + then just return unchanged*/
+                else if(state.numberArray[len-1] === opAdd){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray
+                    }
+                }
+                /* Else n and n+1 in array are different and concat */
+                else{
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(opAdd)
+                    }
+                }
+            }
+            case MULTIPLY:{
+                const len = state.numberArray.length;
+                /* If first entry is * then change to mult */
+                if(state.numberArray[0] === 0){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray
+                    }
+                } 
+                /* if n and n+1 is equal to * then just return unchanged */
+                else if(state.numberArray[len-1] === opMult){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray
+                    }
+                }
+                /* Else n and n+1 in array are different and concat */
+                else{
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(opMult)
+                    }
+                }
+            }
+            case DECIMAL:{
+                if(state.numberArray[0] === valZero[0]){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray = '.'
+                    }
+                }
+                else{
+    
+                    /* Check to see if we have consecutive decimal inputs*/
+                    for(let i = 0; i < state.numberArray.length;i++){
+    
+                        if(state.numberArray[0] === '.' && state.numberArray[1] === '.'){
+                            return{
+                                ...state,
+                                numberArray:NAN
+                            }
+                        }
+                        if(state.numberArray[i] === '.' && state.numberArray[i+1] === '.'){
+                            return{
+                                ...state,
+                                numberArray:NAN
+                            }
+                        }
+                    }
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(opDec[0])
+                    }
+                }
+            }
+            case DIVISION:{
+                const len = state.numberArray.length;
+                /* If first entry is div  then change to mult */
+                if(state.numberArray[0] === 0){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray
+                    }
+                } 
+                /* if n and n+1 is equal to div then just return unchanged */
+                else if(state.numberArray[len-1] === opDiv){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray
+                    }
+                }
+                /* Else n and n+1 in array are different and concat */
+                else{
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(opDiv)
+                    }
+                }
+            }
+            case RESET:
+                return{
+                    ...state,
+                    total:state.total = 0,
+                    numberArray:['0']
+                }
+            case ZERO:
+                if(state.numberArray[0] === valZero[0]){
+                    return{
+                        ...defaultState,
+                        total:state.total = valZero[0],
+                        numberArray:[...valZero]
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valZero[0])
+                }
+            case ADDONE:
+                if(state.numberArray[0] === valZero[0]){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray[0] = valOne[0]
+                    }
+                }
+                else{
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(valOne[0])
+                    }
+                }
+            case ADDTWO:
+                if(state.numberArray[0] === valZero[0]){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray[0] = valTwo[0]
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valTwo[0])
+                }
+            case ADDTHREE:
+                if(state.numberArray[0] === valZero[0]){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray[0] = valThree[0]
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valThree[0])
+                }
+            case ADDFOUR:
+                if(state.numberArray[0] === valZero[0]){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray[0] = valFour[0]
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valFour[0])
+                }
+            case ADDFIVE:
+                if(state.numberArray[0] === valZero[0]){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray[0] = valFive[0]
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valFive[0])
+                }
+            case ADDSIX:
+                if(state.numberArray[0] === valZero[0]){
+                    return{
+                        ...state,
+                        numberArray:state.numberArray[0] = valSix[0]
+                    }
+                }
+                return{
+                    ...state,
+                    numberArray:state.numberArray.concat(valSix[0])
+                }
+                case ADDSEVEN:
+                    if(state.numberArray[0] === valZero[0]){
+                        return{
+                            ...state,
+                            numberArray:state.numberArray[0] = valSeven[0]
+                        }
+                    }
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(valSeven[0])
+                    }
+                case ADDEIGHT:
+                    if(state.numberArray[0] === valZero[0]){
+                        return{
+                            ...state,
+                            numberArray:state.numberArray[0] = valEight[0]
+                        }
+                    }
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(valEight[0])
+                    }
+                case ADDNINE:
+                    if(state.numberArray[0] === valZero[0]){
+                        return{
+                            ...state,
+                            numberArray:state.numberArray[0] = valNine[0]
+                        }
+                    }
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(valNine[0])
+                    }
+                default:
+                    return state
         }
-        case DIVISION:{
-            const len = state.numberArray.length;
-            /* If first entry is div  then change to mult */
-            if(state.numberArray[0] === 0){
-                return{
-                    ...state,
-                    numberArray:state.numberArray
-                }
-            } 
-            /* if n and n+1 is equal to div then just return unchanged */
-            else if(state.numberArray[len-1] === opDiv){
-                return{
-                    ...state,
-                    numberArray:state.numberArray
-                }
-            }
-            /* Else n and n+1 in array are different and concat */
-            else{
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(opDiv)
-                }
-            }
+    }else{
+        return{
+            ...state,
+            numberArray:DIGITLENGTH,
         }
-        case RESET:
-            return{
-                ...state,
-                total:0,
-                numberArray:['0']
-            }
-        case ZERO:
-            if(state.numberArray[0] === valZero[0]){
-                return{
-                    ...defaultState,
-                    total:state.total = valZero[0],
-                    numberArray:[...valZero]
-                }
-            }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valZero[0])
-            }
-        case ADDONE:
-            if(state.numberArray[0] === valZero[0]){
-                return{
-                    ...state,
-                    numberArray:state.numberArray[0] = valOne[0]
-                }
-            }
-            else{
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(valOne[0])
-                }
-            }
-        case ADDTWO:
-            if(state.numberArray[0] === valZero[0]){
-                return{
-                    ...state,
-                    numberArray:state.numberArray[0] = valTwo[0]
-                }
-            }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valTwo[0])
-            }
-        case ADDTHREE:
-            if(state.numberArray[0] === valZero[0]){
-                return{
-                    ...state,
-                    numberArray:state.numberArray[0] = valThree[0]
-                }
-            }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valThree[0])
-            }
-        case ADDFOUR:
-            if(state.numberArray[0] === valZero[0]){
-                return{
-                    ...state,
-                    numberArray:state.numberArray[0] = valFour[0]
-                }
-            }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valFour[0])
-            }
-        case ADDFIVE:
-            if(state.numberArray[0] === valZero[0]){
-                return{
-                    ...state,
-                    numberArray:state.numberArray[0] = valFive[0]
-                }
-            }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valFive[0])
-            }
-        case ADDSIX:
-            if(state.numberArray[0] === valZero[0]){
-                return{
-                    ...state,
-                    numberArray:state.numberArray[0] = valSix[0]
-                }
-            }
-            return{
-                ...state,
-                numberArray:state.numberArray.concat(valSix[0])
-            }
-            case ADDSEVEN:
-                if(state.numberArray[0] === valZero[0]){
-                    return{
-                        ...state,
-                        numberArray:state.numberArray[0] = valSeven[0]
-                    }
-                }
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(valSeven[0])
-                }
-            case ADDEIGHT:
-                if(state.numberArray[0] === valZero[0]){
-                    return{
-                        ...state,
-                        numberArray:state.numberArray[0] = valEight[0]
-                    }
-                }
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(valEight[0])
-                }
-            case ADDNINE:
-                if(state.numberArray[0] === valZero[0]){
-                    return{
-                        ...state,
-                        numberArray:state.numberArray[0] = valNine[0]
-                    }
-                }
-                return{
-                    ...state,
-                    numberArray:state.numberArray.concat(valNine[0])
-                }
-            default:
-                return state
     }
 }
 
