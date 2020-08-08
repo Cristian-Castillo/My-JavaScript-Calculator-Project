@@ -51,7 +51,7 @@ const reducer = (state = defaultState,action) => {
     const copyArray = [...state.numberArray]
     let subContainer = [], resultingArray = []
 
-    /* If over 23 characters, maximun reached reset*/
+    /* Reset to default if we exceed more then 25 characters */
     if(state.numberArray === DIGITLENGTH){
         return{
             ...state,
@@ -59,8 +59,10 @@ const reducer = (state = defaultState,action) => {
             numberArray:['0']
         }
     }
-    /* 32 bit */
-    if(state.numberArray.length < 32){
+
+    /* If characters < 25,continue*/
+    if(state.numberArray.length < 25){
+
         switch(action.type){
 
             case EQUAL:{
@@ -97,7 +99,7 @@ const reducer = (state = defaultState,action) => {
                     /* Check Mult, and push reset str */
                     if(copyArray[i] === opMult[0]){
                         subContainer.push(parseFloat(emptyStr))
-                        subContainer.push(opMult[0])
+                        subContainer.push('*')
                         emptyStr = ''
                     }
                     /* Check Div, and push reset str */
@@ -445,7 +447,8 @@ const reducer = (state = defaultState,action) => {
                 default:
                     return state
         }
-    }else{
+    }
+    else{
         return{
             ...state,
             numberArray:DIGITLENGTH,
