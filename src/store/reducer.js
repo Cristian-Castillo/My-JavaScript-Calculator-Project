@@ -18,6 +18,7 @@ const MULTIPLY = 'MULTIPLY'
 const EQUAL = 'EQUAL'
 const DECIMAL = 'DECIMAL'
 const SUBTRACT = 'SUBTRACT'
+const NAN = 'NaN'
 
 /* default reducer state & array */
 const defaultState = {
@@ -41,8 +42,6 @@ const opMult = ['•'];
 const opDec = ['.'];
 const opDiv = ['/'];
 const opAdd = ['+'];
-const opEqual = ['='];
-const opNan = ['NAN'];
 
 const reducer = (state = defaultState,action) => {
 
@@ -62,14 +61,14 @@ const reducer = (state = defaultState,action) => {
             if(action.type === EQUAL && state.numberArray[0] === valZero[0]){
                 return{
                     ...state,
-                    total:opNan[0]
+                    total:NAN
                 }
             }
             /* Group numbers and isolate math operands */
             for(let i = 0; i < len;i++){
 
                 /* Check Addition */
-                if(copyArray[i] !== '+'){
+                if(copyArray[i] !== opAdd[0]){
                     emptyStr += copyArray[i]
                 }
                 else if(copyArray[i] === '+'){
@@ -78,9 +77,9 @@ const reducer = (state = defaultState,action) => {
                     emptyStr = ''
                 }
                 /* Check Sub, and push reset str */
-                if(copyArray[i] === '-'){
+                if(copyArray[i] === opSub[0]){
                     subContainer.push(parseFloat(emptyStr))
-                    subContainer.push('-')
+                    subContainer.push(opSub[0])
                     emptyStr = ''
                 }
                 /* Check Mult, and push reset str */
@@ -93,11 +92,6 @@ const reducer = (state = defaultState,action) => {
                 if(copyArray[i] === opDiv[0]){
                     subContainer.push(parseFloat(emptyStr))
                     subContainer.push('/')
-                    emptyStr = ''
-                }
-                if(copyArray[i] === opDec[0]){
-                    subContainer.push(parseFloat(emptyStr))
-                    subContainer.push('.')
                     emptyStr = ''
                 }
             }
@@ -121,13 +115,6 @@ const reducer = (state = defaultState,action) => {
                     }
                     if(subContainer[j] === '/'){
                         accumulator = subContainer[j-1]/subContainer[j+1]
-                        subContainer[j-1] = 'x'
-                        subContainer[j] ='x'
-                        subContainer[j+1] = accumulator
-                        accumulator = 0
-                    }
-                    if(subContainer[j] === '.'){
-                        accumulator = subContainer[j-1]+`.`+subContainer[j+1]
                         subContainer[j-1] = 'x'
                         subContainer[j] ='x'
                         subContainer[j+1] = accumulator
@@ -270,18 +257,25 @@ const reducer = (state = defaultState,action) => {
             }
         }
         case DECIMAL:{
-         
             if(state.numberArray[0] === valZero[0]){
-                console.log('heolo')
                 return{
                     ...state,
-                    numberArray:state.numberArray = [...state.numberArray,'0','.']
+                    numberArray:state.numberArray = '.'
                 }
             }
             else{
+                /* Check to see if we have consecutive decimal inputs*/
+                for(let i = 0; i < state.numberArray.length;i++){
+                    if(state.numberArray[i] === '.' && state.numberArray[i+1] === '.'){
+                        return{
+                            ...state,
+                            numberArray:NAN
+                        }
+                    }
+                }
                 return{
                     ...state,
-                    numberArray:state.numberArray
+                    numberArray:state.numberArray.concat(opDec[0])
                 }
             }
         }

@@ -63,7 +63,7 @@ button:hover{
     border:none;
     color:white;
     background-color:rgb(221, 62, 97);
-    transition-delay:.3s;
+    transition-delay:.2s;
 }
 
 .ac-style:hover{
