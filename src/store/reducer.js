@@ -50,7 +50,6 @@ const reducer = (state = defaultState,action) => {
 
     const copyArray = [...state.numberArray]
     let subContainer = [], resultingArray = []
-
     /* Reset to default if we exceed more then 25 characters */
     if(state.numberArray === DIGITLENGTH){
         return{
@@ -59,9 +58,8 @@ const reducer = (state = defaultState,action) => {
             numberArray:['0']
         }
     }
-
-    /* If characters < 25,continue*/
-    if(state.numberArray.length < 25){
+    /* If characters < 24, continue*/
+    if(state.numberArray.length < 24){
 
         switch(action.type){
 
@@ -195,20 +193,20 @@ const reducer = (state = defaultState,action) => {
                 /* Return result! */
                 return{
                     ...state,
-                    total:state.total = accumulator,
+                    total:accumulator,
                 }
             }
             case SUBTRACT:{
                 const len = state.numberArray.length;
                 /* If first entry is - then change to sub */
-                if(state.numberArray[0] === 0){
+                if(state.numberArray[0] === valZero[0]){
                     return{
                         ...state,
                         numberArray:state.numberArray[0] = opSub
                     }
                 } 
                 /* if n and n+1 is equal to - then just return unchanged*/
-                else if(state.numberArray[len-1] === opSub){
+                else if(state.numberArray[len-1] === opSub[0]){
                     return{
                         ...state,
                         numberArray:state.numberArray
@@ -270,37 +268,29 @@ const reducer = (state = defaultState,action) => {
                     }
                 }
             }
-            case DECIMAL:{
+            case DECIMAL:
+                const len = state.numberArray.length;
+                /* If first entry is - then change to sub */
                 if(state.numberArray[0] === valZero[0]){
                     return{
                         ...state,
-                        numberArray:state.numberArray = '.'
+                        numberArray:state.numberArray[0] = opDec
                     }
-                }
-                else{
-    
-                    /* Check to see if we have consecutive decimal inputs*/
-                    for(let i = 0; i < state.numberArray.length;i++){
-    
-                        if(state.numberArray[0] === '.' && state.numberArray[1] === '.'){
-                            return{
-                                ...state,
-                                numberArray:NAN
-                            }
-                        }
-                        if(state.numberArray[i] === '.' && state.numberArray[i+1] === '.'){
-                            return{
-                                ...state,
-                                numberArray:NAN
-                            }
-                        }
-                    }
+                } 
+                /* if n and n+1 is equal to - then just return unchanged*/
+                else if(state.numberArray[len-1] === opDec[0]){
                     return{
                         ...state,
-                        numberArray:state.numberArray.concat(opDec[0])
+                        numberArray:state.numberArray
                     }
                 }
-            }
+                /* Else n and n+1 in array are different and concat */
+                else{
+                    return{
+                        ...state,
+                        numberArray:state.numberArray.concat(opDec)
+                    }
+                }
             case DIVISION:{
                 const len = state.numberArray.length;
                 /* If first entry is div  then change to mult */
@@ -329,7 +319,8 @@ const reducer = (state = defaultState,action) => {
                 return{
                     ...state,
                     total:state.total = 0,
-                    numberArray:['0']
+                    numberArray:['0'],
+                    countDecimal:0
                 }
             case ZERO:
                 if(state.numberArray[0] === valZero[0]){

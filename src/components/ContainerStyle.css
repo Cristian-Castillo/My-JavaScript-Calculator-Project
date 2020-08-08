@@ -36,8 +36,8 @@ text-align:center;
 }
 
 .container{
-width:260px;
-background-color:black;
+  width:260px;
+  background-color:black;
 }
 
 .col-result-layout{
@@ -45,12 +45,17 @@ background-color:black;
   background-color:black !important;
 }
 
+.col-12{
+  width:200px;
+  overflow-wrap: break-word;
+}
+
 .col-subresult{
   font-size:15px;
   color:orange;
   padding-top:3px;
-  background-color:black !important;
   width:180px;
+  overflow-wrap: break-word;
 
 }
 
