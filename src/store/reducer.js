@@ -134,7 +134,6 @@ const reducer = (state = defaultState,action) => {
                         }
                     }
                 }
-    
                 for(let j = 0; j < subLen;j++){
             
                     if((j % 2) !== 0){
@@ -162,6 +161,7 @@ const reducer = (state = defaultState,action) => {
                     }
                 }
                 /* Pemdas in Action for add and sub */
+                console.log(resultingArray)
                 for(let j = 0; j < resultingArray.length;j++){
                 
                     if((j % 2) !== 0){
@@ -179,9 +179,16 @@ const reducer = (state = defaultState,action) => {
                             resultingArray[j] ='x'
                             resultingArray[j+1] = accumulator
                             accumulator = 0
+                            // accumulator = -1*resultingArray[j+1]
+                            // resultingArray[j-1] = 'x'
+                            // resultingArray[j] ='x'
+                            // resultingArray[j+1] = accumulator
+                            // accumulator = 0
                         }
                     }
-                }
+                }       
+                console.log(resultingArray)
+
                 accumulator = 0
                 /* Remove dummy data x from array and store result*/
                 for(let i = 0; i < resultingArray.length;i++){
@@ -202,7 +209,7 @@ const reducer = (state = defaultState,action) => {
                 if(state.numberArray[0] === valZero[0]){
                     return{
                         ...state,
-                        numberArray:state.numberArray[0] = opSub
+                        numberArray:state.numberArray[0] = opSub[0]
                     }
                 } 
                 /* if n and n+1 is equal to - then just return unchanged*/
@@ -216,7 +223,7 @@ const reducer = (state = defaultState,action) => {
                 else{
                     return{
                         ...state,
-                        numberArray:state.numberArray.concat(opSub)
+                        numberArray:state.numberArray.concat(opSub[0])
                     }
                 }
             }

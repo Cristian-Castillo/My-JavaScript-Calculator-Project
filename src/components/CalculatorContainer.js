@@ -4,7 +4,6 @@ import ContainerStyle from './ContainerStyle.css'
 
 class CalculatorContainer extends Component {
 
-
     render(){
         /* Returns math operation result from redux store*/
         /* Declared const to hold props from store */
@@ -46,7 +45,6 @@ class CalculatorContainer extends Component {
                 </div>
                 <div className="container">
                     <div className="row col-result-layout">
-                    {this.check}
                 <div className="col-12 col-subresult">{(displayArray[0] === '0' ? displayResult: displayResult ? `${displayArray}=${displayResult}` : displayArray)}</div>
                     <div className="col-12 ">{displayResult}</div>
                 </div>
@@ -73,7 +71,7 @@ class CalculatorContainer extends Component {
                     <div style= {styleButton} className="col-3"><button className='dig-three' onClick ={addThree}>3</button></div>
                     <div className="col-3 op-equalDiv"><button className='op-equal' onClick ={setEqual}>=</button></div>
                 </div>
-                <div style = {{paddingBottom:'2px'}} className="row r5">
+                <div style = {{paddingBottom:'3.2px'}} className="row r5">
                     <div className="col-6 dig-zeroDiv"><button className='dig-zero' onClick ={addZero}>0</button></div>
                     <div style= {styleButton} className="col-3"><button className='op-dec' onClick ={setDecimal}>.</button></div>
                     <div className='deadCell'><button className = 'op-enter' onClick ={setEqual}>Enter</button></div>

@@ -29,14 +29,15 @@ button:hover{
 }
 
 .row{
-  padding-left:2.5px;
-  padding-right:2.5px;
+  padding-left:3.5px;
+  padding-right:3.5px;
   text-align:center;
 }
 
 .container{
   width:260px;
   background-color:black;
+  border:none;
 }
 
 .col-3{
@@ -44,7 +45,7 @@ button:hover{
   transition:2;
 }
 .col-3:hover{
-  transform:scale(1.03);
+  transform:scale(1.01);
 }
 
 .col-result-layout{
@@ -85,7 +86,7 @@ button:hover{
 
 .ac-div:hover{
   background-color:rgb(255, 5, 60) !important;
-  transform:scale(1.03);
+  transform:scale(1.02);
 } 
 
 .mult-style{
@@ -223,7 +224,7 @@ color:black;
 }
 
 .dig-zero:hover{
-  transform:scale(1.02);
+  transform:scale(1.01);
 }
 
 .dig-zeroDiv{
@@ -234,7 +235,7 @@ color:black;
 }
 
 .dig-zeroDiv:hover{
-  transform:scale(1.03);
+  transform:scale(1.02);
 }
 .op-dec{
   border:.5px solid black;
