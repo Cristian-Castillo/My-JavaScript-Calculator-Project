@@ -18,7 +18,7 @@
 button{
   text-align: center !important;
   outline:none !important;
-  border:none !important;
+  border:.5px solid black !important;
   color:white;
   background-color:var(--darkGray);
   animation-name: colorful;
