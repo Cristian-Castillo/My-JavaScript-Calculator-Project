@@ -49,9 +49,10 @@ const opAdd = ['+'];
 const reducer = (state = defaultState,action) => {
 
     const copyArray = [...state.numberArray]
-    let subContainer = [], resultingArray = []
-    /* Reset to default if we exceed more then 25 characters */
-    if(state.numberArray === DIGITLENGTH){
+    let subContainer = []
+    /* Reset to default if we exceed more then 25 characters or
+       if we received character n1 - + n2 in str reset */
+    if(state.numberArray === DIGITLENGTH || state.numberArray === NAN){
         return{
             ...state,
             total:state.total = 0,
@@ -76,165 +77,35 @@ const reducer = (state = defaultState,action) => {
                         total:NAN
                     }
                 }
-                /* Group numbers and isolate math operands */
-                for(let i = 0; i < len;i++){
-    
-                    /* Check Addition */
-                    if(copyArray[i] !== opAdd[0]){
-                        emptyStr += copyArray[i]
-                    }
-                    else if(copyArray[i] === opAdd[0]){
-                        subContainer.push(parseFloat(emptyStr))
-                        subContainer.push(opAdd[0])
-                        emptyStr = ''
-                    }
-                    /* Check Sub, and push reset str */
-                    if(copyArray[i] === opSub[0]){
-                        subContainer.push(parseFloat(emptyStr))
-                        subContainer.push(opSub[0])
-                        emptyStr = ''
-                    }
+                /* isolate characters */
+                for(let i = 0; i < len; i++){
                     /* Check Mult, and push reset str */
                     if(copyArray[i] === opMult[0]){
-                        subContainer.push(parseFloat(emptyStr))
                         subContainer.push('*')
                         emptyStr = ''
                     }
-                    /* Check Div, and push reset str */
-                    if(copyArray[i] === opDiv[0]){
-                        subContainer.push(parseFloat(emptyStr))
-                        subContainer.push(opDiv[0])
-                        emptyStr = ''
+                    if(copyArray[i] === '-' && copyArray[i+1] === '+'){
+                        return{
+                            ...state,
+                             numberArray:NAN
+                        }
                     }
+                    if(copyArray[i] !== '•'){
+                        emptyStr = copyArray[i]
+                        subContainer[i] = emptyStr
+                        emptyStr = ''   
+                    }          
                 }
-                /* Convert str to float */
-                subContainer.push(parseFloat(emptyStr))
-                emptyStr = '';
-    
-                /* Begin math logic operations */
-                const subLen = subContainer.length
-                
-                /* Pemdas in Action for MULT and DIV*/
-                for(let j = 0; j < subLen;j++){
-                
-                    if((j % 2) !== 0){
-                        
-                        if(subContainer[j] === '*'){
-                            accumulator = subContainer[j-1]*subContainer[j+1]
-                            subContainer[j-1] = 'x'
-                            subContainer[j] ='x'
-                            subContainer[j+1] = accumulator
-                            accumulator = 0
-                        }
-                        if(subContainer[j] === '/'){
-                            accumulator = subContainer[j-1]/subContainer[j+1]
-                            subContainer[j-1] = 'x'
-                            subContainer[j] ='x'
-                            subContainer[j+1] = accumulator
-                            accumulator = 0
-                        }
-                        
-                    }
+                subContainer.push(emptyStr)
+                subContainer.pop()
+                /* Convert to str */
+                for(let i = 0; i < subContainer.length;i++){
+                    emptyStr += subContainer[i]
                 }
-
-                for(let j = 0; j < subLen;j++){
-                    
-                    if((j % 2) !== 0){
-                        
-                        if(subContainer[j] === NaN){
-                            subContainer[j] = 'x'
-                        }
-                        if(subContainer[j] === '*'){
-                            accumulator = subContainer[j-1]*subContainer[j+1]
-                            subContainer[j-1] = 'x'
-                            subContainer[j] ='x'
-                            subContainer[j+1] = accumulator
-                            accumulator = 0
-                        }
-                        if(subContainer[j] === '/'){
-                            accumulator = subContainer[j-1]/subContainer[j+1]
-                            subContainer[j-1] = 'x'
-                            subContainer[j] ='x'
-                            subContainer[j+1] = accumulator
-                            accumulator = 0
-                        }
-                    }
-                }
-
-                /* Remove dummy data x from array */
-                for(let i = 0; i < subLen;i++){
-                    if(subContainer[i] !== 'x'){
-                        resultingArray.push(subContainer[i])
-                    }
-                }
-
-                /* Pemdas in Action for ADD and SUB */
-
-                for(let j = 0; j < resultingArray.length;j++){
-
-                
-                    if((j % 2) !== 0){
-                        
-                        if(resultingArray[j] === '+'){
-                            accumulator = resultingArray[j-1]+resultingArray[j+1]
-                            resultingArray[j-1] = 'x'
-                            resultingArray[j] ='x'
-                            resultingArray[j+1] = accumulator
-                            accumulator = 0
-                        }
-                        if(resultingArray[j] === '-'){
-                            accumulator = resultingArray[j-1]-resultingArray[j+1]
-                            resultingArray[j-1] = 'x'
-                            resultingArray[j] ='x'
-                            resultingArray[j+1] = accumulator
-                            accumulator = 0
-                        }
-                    }
-                    /* Else we only check if  n = 0, 2 , 4 starting pos for
-                    neg symbol and create a negative value */
-                    if((j % 2 === 0)){
-                        console.log('TEST: '+resultingArray)
-                        if(resultingArray[j+1] === '-'){
-                            console.log('oksdf ' )
-                            resultingArray[j] = 'x'
-                            resultingArray[j+1] = 'x'
-                            accumulator = resultingArray[j+2]*-1
-                            resultingArray[j+2] = accumulator
-                            accumulator = 0
-
-                            switch(resultingArray[j+3]){
-                                case '+':
-                                    resultingArray[j+3] = 'x'
-                                    resultingArray[j+4] = resultingArray[j+2]+resultingArray[j+4]
-                                    break
-                                case '-':
-                                    resultingArray[j+3] = 'x'
-                                    resultingArray[j+4] = resultingArray[j+2]-resultingArray[j+4]
-                                    break;
-                                case '*':
-                                    resultingArray[j+3] = 'x'
-                                    resultingArray[j+4] = resultingArray[j+2]*resultingArray[j+4]
-                                    break;
-                                case '/':
-                                    resultingArray[j+3] = 'x'
-                                    resultingArray[j+4] = resultingArray[j+2]/resultingArray[j+4]
-                                    break;
-                            }
-                        }
-                    }
-                }  
-                accumulator = 0
-                /* Remove dummy data x from array and store result*/
-                for(let i = 0; i < resultingArray.length;i++){
-    
-                    if(resultingArray[i] !== 'x'){
-                        accumulator = resultingArray[i]
-                    }
-                }
-                /* Return result! */
+                accumulator = eval(emptyStr)
                 return{
                     ...state,
-                    total:accumulator,
+                    total:accumulator
                 }
             }
             case SUBTRACT:{
@@ -255,6 +126,15 @@ const reducer = (state = defaultState,action) => {
                 }
                 /* Else n and n+1 in array are different and concat */
                 else{
+                    /* Check to see if we get n - + (n+1) not valid */ 
+                    for(let i = 0; i < state.numberArray.length; i++){
+                        if(state.numberArray[i] === '-' && state.numberArray[i+1] === '+'){
+                            return{
+                                ...state,
+                                numberArray:NAN
+                            }
+                        }
+                    }
                     return{
                         ...state,
                         numberArray:state.numberArray.concat(opSub[0])
