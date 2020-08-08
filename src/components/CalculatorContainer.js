@@ -4,6 +4,7 @@ import ContainerStyle from './ContainerStyle.css'
 
 class CalculatorContainer extends Component {
 
+
     render(){
         /* Returns math operation result from redux store*/
         /* Declared const to hold props from store */
@@ -45,7 +46,8 @@ class CalculatorContainer extends Component {
                 </div>
                 <div className="container">
                     <div className="row col-result-layout">
-                <div className="col-12 col-subresult">{displayArray[0] === '0' ? displayResult : displayArray}{displayResult !== '0' ? `=${displayResult}` : null}</div>
+                    {this.check}
+                <div className="col-12 col-subresult">{(displayArray[0] === '0' ? displayResult: displayResult ? `${displayArray}=${displayResult}` : displayArray)}</div>
                     <div className="col-12 ">{displayResult}</div>
                 </div>
                 <div className="row r1">

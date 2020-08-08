@@ -313,9 +313,9 @@ const reducer = (state = defaultState,action) => {
         }
         case RESET:
             return{
-                ...defaultState,
-                total:state.total = valZero[0],
-                numberArray:[...valZero]
+                ...state,
+                total:0,
+                numberArray:['0']
             }
         case ZERO:
             if(state.numberArray[0] === valZero[0]){

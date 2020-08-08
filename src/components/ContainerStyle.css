@@ -36,7 +36,7 @@ text-align:center;
 }
 
 .container{
-width:250px;
+width:260px;
 background-color:black;
 }
 
@@ -231,7 +231,7 @@ border-style:none;
 background-color:rgb(1, 89, 133) !important;
 cursor:pointer;
 border:.1px solid black;
-width:61.24px;
+width:63.25px;
 font-size:13px;
 padding-top:4px;
 border-top:none;
@@ -239,7 +239,7 @@ border-top:none;
 
 .authorDiv{
 background-color:#c1d6ec;
-width:250px;
+width:260px;
 margin-left:-15px;
 padding-bottom:10px;
 border-left:none;
@@ -290,6 +290,6 @@ transition-delay:.07s;
 .coolStyle{
 font-family: 'Lemonada', cursive;
 font-family: 'Lobster Two', cursive;
-font-size:70px;
+font-size:74px;
 text-align: center;
 }
