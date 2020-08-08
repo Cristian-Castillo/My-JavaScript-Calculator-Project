@@ -63,7 +63,7 @@ background-color:rgb(221, 62, 97);
   border:none;
   color:white;
   background-color:rgb(221, 62, 97);
-  transition-delay:.2s;
+  transition-delay:.3s;
 }
 
 .ac-style:hover{
@@ -293,4 +293,3 @@ font-family: 'Lobster Two', cursive;
 font-size:70px;
 text-align: center;
 }
-
