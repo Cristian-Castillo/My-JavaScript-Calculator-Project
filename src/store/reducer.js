@@ -274,7 +274,7 @@ const reducer = (state = defaultState,action) => {
                 if(state.numberArray[0] === valZero[0]){
                     return{
                         ...state,
-                        numberArray:state.numberArray[0] = opDec
+                        numberArray:state.numberArray[0] = opDec[0]
                     }
                 } 
                 /* if n and n+1 is equal to - then just return unchanged*/
