@@ -288,7 +288,7 @@ const reducer = (state = defaultState,action) => {
                 else{
                     return{
                         ...state,
-                        numberArray:state.numberArray.concat(opDec)
+                        numberArray:state.numberArray.concat(opDec[0])
                     }
                 }
             case DIVISION:{
